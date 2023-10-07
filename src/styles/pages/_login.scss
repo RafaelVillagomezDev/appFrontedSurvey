@@ -7,6 +7,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main_div-title{
+    font-size: 32px;
+    font-weight: 800;
+    color: black;
+    display: flex;
+    align-items: center;
 }
 
 #form{
@@ -62,4 +72,5 @@
     border: 0;
     color: white;
     font-size: 16px;
+    cursor: pointer;
 }
