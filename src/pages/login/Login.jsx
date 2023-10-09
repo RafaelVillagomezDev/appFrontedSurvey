@@ -10,14 +10,19 @@ function Login() {
   const [email, setImail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const user = useSelector((state) => state.login.user.token);
+
  
-  const loginUser = async(event) => {
+  const loginUser = (event) => {
     event.preventDefault();
     const objLogin = { email: email, password: password };
-    dispatch(authUser(objLogin));
+    dispatch(authUser(objLogin)).then((result)=>{
+      if(result.payload){
+        navigate("/app");
+        window.location.reload()
+      }
+    });
+
     
-    navigate("/app");
   };
 
   return (
@@ -53,7 +58,6 @@ function Login() {
               required
             />
           </div>
-          {user}
           <button className="form_btn-submit" type="submit" onClick={loginUser}>
             Login
           </button>

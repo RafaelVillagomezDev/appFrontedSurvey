@@ -19,7 +19,9 @@ const initialState={
 
 export const authUser=createAsyncThunk('loginSlice/fetchLogin',
     async(obj)=>{
-        return await getAuthUser(obj)
+       const data=await getAuthUser(obj)
+       saveLocalStorage('token',data.token)
+       return data
     }
 )
 
@@ -45,7 +47,6 @@ export const loginSlice=createSlice({
                 user_name:userCopy.data.surname
             }
             saveLocalStorage('user',user)
-            saveLocalStorage('token',action.payload.token)
           })
           .addCase(authUser.rejected, (state) => {
             state.status = 'failed'
