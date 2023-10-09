@@ -29,9 +29,6 @@ export const loginSlice=createSlice({
     name:'login',
     initialState,
     reducers:{
-        login:(state)=>{
-            state.user.name_user="0w0iee"
-        }
     }
     ,extraReducers: (builder) => {
         builder

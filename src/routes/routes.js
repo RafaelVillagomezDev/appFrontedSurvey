@@ -5,6 +5,11 @@ import { getLocalStorage } from "../utils/storage/saveLocalStorage";
 import Home from "../pages/home/Home";
 import Error from "../pages/error/error";
 
+/*
+Otra alternativa mediante rutas 
+No la he usado 
+*/
+
 const token = getLocalStorage("token") ? true : false;
 
 const routesApp = () => {

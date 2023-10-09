@@ -1,0 +1,29 @@
+#navbar{
+    background-color: black;
+    height:80px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+}
+
+.navbar_ul{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    color: white;
+   
+}
+
+.navbar_li{
+    display: flex;
+    align-items: center;  
+}
+
+.nav-route{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    &:hover{
+        color: orange;
+    }
+}

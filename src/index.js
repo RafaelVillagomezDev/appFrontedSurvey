@@ -15,6 +15,7 @@ import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import { ProtectedRoutes } from "./utils/auth/ProtectedRoutes";
 import { getLocalStorage } from "./utils/storage/saveLocalStorage";
+import CreateSurvey from "./pages/create/CreateSurvey";
 
 
 const token = getLocalStorage("token") ? true : false;
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
     <Route path="login" element={<Login />} />
     <Route  element={<ProtectedRoutes canPass={token}/>}>
       <Route path="/app" element={<Home />} />
+      <Route path="/app/create" element={<CreateSurvey/>} />
     </Route>
   </>
    
