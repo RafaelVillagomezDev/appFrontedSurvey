@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSurvey } from "../../slices/survey/surveySlice";
+import { deleteSurvey, getSurvey } from "../../slices/survey/surveySlice";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
 import { isUser } from "../../utils/auth/ProtectedRoutes";
 
@@ -8,13 +8,26 @@ function ListSurvey() {
   const dispatch = useDispatch();
 
   const { survey } = useSelector((state) => state.survey);
+  const [encuesta, setEncuesta] = useState(survey);
+  const [id_encuesta, setIdencuesta] = useState(survey);
   const token = getLocalStorage("token");
 
   useEffect(() => {
-    dispatch(getSurvey(token));
+    dispatch(getSurvey(token)).then((result) => {
+      if (result.payload) {
+        setEncuesta(result.payload.data);
+      }
+    });
+
+   
   }, [dispatch]);
 
-  return survey.map((survey, index) => (
+  const eliminar = (id_encuesta) => {
+    setIdencuesta(id_encuesta);
+    dispatch(deleteSurvey(token, id_encuesta))
+  };
+
+  return encuesta.map((survey, index) => (
     <div id="survey-container" key={index}>
       <div className="tabla">
         <div className="tabla_fila">
@@ -41,8 +54,6 @@ function ListSurvey() {
           </div>
         </div>
         <div className="tabla_fila2">
-          <input type="hidden"  value={survey.Id_encuesta} />
-
           <div className="tabla_columna">
             <h2>{survey.Dni}</h2>
           </div>
@@ -66,7 +77,11 @@ function ListSurvey() {
           </div>
         </div>
       </div>
-      <button className="btn_mobile-remove">
+      <button
+        type="button"
+        onClick={() => eliminar(survey.Id_encuesta)}
+        className="btn_mobile-remove"
+      >
         <span>Eliminar Encuesta</span>
       </button>
     </div>
