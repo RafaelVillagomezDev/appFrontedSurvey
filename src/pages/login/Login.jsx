@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { authUser, login } from "../../slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
+import { isRol } from "../../utils/auth/ProtectedRoutes";
+
 
 function Login() {
 
@@ -10,6 +12,7 @@ function Login() {
   const [email, setImail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
 
  
   const loginUser = (event) => {

@@ -2,19 +2,21 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSurvey } from "../../slices/survey/surveySlice";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
+import { isUser } from "../../utils/auth/ProtectedRoutes";
 
 function ListSurvey() {
   const dispatch = useDispatch();
 
   const { survey } = useSelector((state) => state.survey);
   const token = getLocalStorage("token");
+
   useEffect(() => {
     dispatch(getSurvey(token));
   }, [dispatch]);
 
   return survey.map((survey, index) => (
-    <div id="survey-container">
-      <div className="tabla" key={index}>
+    <div id="survey-container" key={index}>
+      <div className="tabla">
         <div className="tabla_fila">
           <div className="tabla_columna">
             <h2>DNI</h2>

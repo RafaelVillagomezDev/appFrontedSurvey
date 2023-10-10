@@ -13,25 +13,31 @@ import { Provider } from "react-redux";
 import routesApp from "./routes/routes";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
-import { ProtectedRoutes } from "./utils/auth/ProtectedRoutes";
+import {
+  isRol,
+  ProtectedRoutes,
+  ProtectedRoutesAdmin,
+} from "./utils/auth/ProtectedRoutes";
 import { getLocalStorage } from "./utils/storage/saveLocalStorage";
 import CreateSurvey from "./pages/create/CreateSurvey";
+import Update from "./pages/update/Update";
 
-
-const token = getLocalStorage("token") ? true : false;
-
+const isToken = getLocalStorage("token") ? true : false;
+const authUser = isRol(getLocalStorage("token"), isToken);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-  <>
-    <Route path="/" element={<Login/>} />
-    <Route path="login" element={<Login />} />
-    <Route  element={<ProtectedRoutes canPass={token}/>}>
-      <Route path="/app" element={<Home />} />
-      <Route path="/app/create" element={<CreateSurvey/>} />
-    </Route>
-  </>
-   
+    <>
+      <Route path="/" element={<Login />} />
+      <Route path="login" element={<Login />} />
+      <Route element={<ProtectedRoutesAdmin adminPass={authUser} />}>
+    
+        <Route path="/app/create" element={<CreateSurvey />} />
+      </Route>
+      <Route element={<ProtectedRoutes canPass={isToken} />}>
+        <Route path="/app" element={<Home />} />
+      </Route>
+    </>
   )
 );
 

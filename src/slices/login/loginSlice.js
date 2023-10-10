@@ -7,6 +7,7 @@ const userInitial={
     email:"yandry75@gmail.com",
     name_user:"yandry",
     surname:"Villagomez",
+    rol:"default"
 }
 
 
@@ -41,7 +42,8 @@ export const loginSlice=createSlice({
             const userCopy={...action.payload}
             const user={
                 name:userCopy.data.name,
-                user_name:userCopy.data.surname
+                user_name:userCopy.data.surname,
+                rol:userCopy.data.rol
             }
             saveLocalStorage('user',user)
           })
