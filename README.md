@@ -12,7 +12,7 @@ Asegúrate de tener Node.js y npm instalados en tu sistema antes de continuar. S
 
 ## Instalación
 
-1. Clona el repositorio https://github.com/RafaelVillagomezDev/appFronted.git  o descarga el código fuente.
+1. Clona el repositorio usando este comando : git clone https://github.com/RafaelVillagomezDev/appFronted.git  o descarga el código fuente.
 
 Este comando generará los directorios que se encuentran en esta app .
 
