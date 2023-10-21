@@ -6,14 +6,13 @@ import { getLocalStorage, saveLocalStorage } from "../../utils/storage/saveLocal
 
 const initialState = {
   survey:[],
-  saveSurvey:getLocalStorage("survey")
+  
 };
 
 export const getSurvey = createAsyncThunk(
   "surveySlice/fetchSurvey",
   async (token) => {
     const data = await getListSurvey(token);
-    saveLocalStorage("survey",data.data)
     return data;
   }
 );
@@ -21,7 +20,7 @@ export const getSurvey = createAsyncThunk(
 export const deleteSurvey= createAsyncThunk(
   "surveySlice/deleteSurvey",
   async (token,id_encuesta) => {
-    const data = await removeItemSurvey(token,id_encuesta);
+    const data = await removeItemSurvey(token,"5b317a55-91c9-4e78-9f5d-3582c5711387");
     
     return data;
   }
@@ -50,7 +49,7 @@ export const surveySlice = createSlice({
       })
       .addCase(deleteSurvey.fulfilled, (state, action) => {
         state.status = "success";
-        state.survey=action.payload.data
+       
       })
       .addCase(deleteSurvey.rejected, (state) => {
         state.status = "failed";

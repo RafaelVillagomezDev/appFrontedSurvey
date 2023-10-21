@@ -9,7 +9,7 @@ function ListSurvey() {
 
   const { survey } = useSelector((state) => state.survey);
   const [encuesta, setEncuesta] = useState(survey);
-  const [id_encuesta, setIdencuesta] = useState(survey);
+
   const token = getLocalStorage("token");
 
   useEffect(() => {
@@ -23,7 +23,6 @@ function ListSurvey() {
   }, [dispatch]);
 
   const eliminar = (id_encuesta) => {
-    setIdencuesta(id_encuesta);
     dispatch(deleteSurvey(token, id_encuesta))
   };
 
