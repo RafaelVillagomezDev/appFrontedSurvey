@@ -2,18 +2,12 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { getAuthUser } from "../../services/auth/loginUser";
 import { saveLocalStorage } from "../../utils/storage/saveLocalStorage";
 
-const userInitial={
 
-    email:"yandry75@gmail.com",
-    name_user:"yandry",
-    surname:"Villagomez",
-    rol:"default"
-}
 
 
 
 const initialState={
-    user:userInitial,
+    user:[],
     
 }
 
@@ -38,14 +32,16 @@ export const loginSlice=createSlice({
           })
           .addCase(authUser.fulfilled, (state, action) => {
             state.status = 'success'
-            state.user = action.payload
-            const userCopy={...action.payload}
-            const user={
-                name:userCopy.data.name,
-                user_name:userCopy.data.surname,
-                rol:userCopy.data.rol
-            }
-            saveLocalStorage('user',user)
+            // const userCopy={...initialState,...action.payload}
+            // const userFecth={
+            //     name:userCopy.data.name,
+            //     user_name:userCopy.data.surname,
+            //     rol:userCopy.data.rol
+            // }
+            // state.user=userFecth
+            state.user=action.payload.data
+            saveLocalStorage('user',action.payload.data)
+            
           })
           .addCase(authUser.rejected, (state) => {
             state.status = 'failed'

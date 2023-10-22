@@ -50,9 +50,9 @@ export const surveySlice = createSlice({
     });
     builder.addCase(deleteSurvey.fulfilled, (state, action) => {
       state.status = "success";
-      console.log(action.payload);
-      let data = state.survey.filter((ele) => ele.id !== action.payload.id);
-      console.log(action.payload);
+     
+      let data = state.survey.filter((elem) => elem.id_encuesta !== action.payload.id_encuesta);
+      console.log(data);
       state.survey = data;
     });
     builder.addCase(deleteSurvey.rejected, (state) => {
