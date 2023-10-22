@@ -1,12 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getListSurvey, removeItemSurvey } from "../../services/survey/surveyObj";
-import { getLocalStorage, saveLocalStorage } from "../../utils/storage/saveLocalStorage";
-
-;
+import {
+  getListSurvey,
+  removeItemSurvey,
+} from "../../services/survey/surveyObj";
+import {
+  getLocalStorage,
+  saveLocalStorage,
+} from "../../utils/storage/saveLocalStorage";
 
 const initialState = {
-  survey:[],
-  
+  survey: [],
 };
 
 export const getSurvey = createAsyncThunk(
@@ -17,11 +20,12 @@ export const getSurvey = createAsyncThunk(
   }
 );
 
-export const deleteSurvey= createAsyncThunk(
+export const deleteSurvey = createAsyncThunk(
   "surveySlice/deleteSurvey",
-  async (token,id_encuesta) => {
-    const data = await removeItemSurvey(token,"5b317a55-91c9-4e78-9f5d-3582c5711387");
+  async (obj) => {
     
+    const data = await removeItemSurvey(obj);
+
     return data;
   }
 );
@@ -29,31 +33,31 @@ export const deleteSurvey= createAsyncThunk(
 export const surveySlice = createSlice({
   name: "survey",
   initialState,
-  reducers: {
-   
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(getSurvey.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(getSurvey.fulfilled, (state, action) => {
-        state.status = "success";
-        state.survey=action.payload.data
-      })
-      .addCase(getSurvey.rejected, (state) => {
-        state.status = "failed";
-      })
-      .addCase(deleteSurvey.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(deleteSurvey.fulfilled, (state, action) => {
-        state.status = "success";
-       
-      })
-      .addCase(deleteSurvey.rejected, (state) => {
-        state.status = "failed";
-      });
+    builder.addCase(getSurvey.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(getSurvey.fulfilled, (state, action) => {
+      state.status = "success";
+      state.survey = action.payload.data;
+    });
+    builder.addCase(getSurvey.rejected, (state) => {
+      state.status = "failed";
+    });
+    builder.addCase(deleteSurvey.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(deleteSurvey.fulfilled, (state, action) => {
+      state.status = "success";
+      console.log(action.payload);
+      let data = state.survey.filter((ele) => ele.id !== action.payload.id);
+      console.log(action.payload);
+      state.survey = data;
+    });
+    builder.addCase(deleteSurvey.rejected, (state) => {
+      state.status = "failed";
+    });
   },
 });
 export const {} = surveySlice.actions;

@@ -18,8 +18,9 @@ const getListSurvey = async (objToken) => {
   }
 };
 
-const removeItemSurvey = (objToken, id_encuesta) => {
-  const bearerToken = objToken;
+const removeItemSurvey = async (obj) => {
+  const {id_encuesta,token} = obj;
+  const bearerToken = token;
 
   const params = {
     method: "DELETE",
@@ -29,22 +30,17 @@ const removeItemSurvey = (objToken, id_encuesta) => {
     },
   };
 
-  fetch(`http://localhost:3445/api/v1/delete/${id_encuesta}`, params)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          `La solicitud no fue exitosa. Código de estado: ${response.status}`
-        );
-      }
-
-      return id_encuesta;
-    })
-    .then((data) => console.log("data"))
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    const response = await fetch(
+      `http://localhost:3445/api/v1/delete/${id_encuesta}`,
+      params
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 };
-
 
 module.exports = {
   getListSurvey,

@@ -13,20 +13,22 @@ function ListSurvey() {
   const token = getLocalStorage("token");
 
   useEffect(() => {
-    dispatch(getSurvey(token)).then((result) => {
-      if (result.payload) {
-        setEncuesta(result.payload.data);
-      }
-    });
+    dispatch(getSurvey(token))
 
    
   }, [dispatch]);
 
   const eliminar = (id_encuesta) => {
-    dispatch(deleteSurvey(token, id_encuesta))
+    const obj={
+       token:token,
+       id_encuesta:id_encuesta
+    }
+    dispatch(deleteSurvey(obj)).then((resp)=>{
+       console.log(resp)
+    })
   };
 
-  return encuesta.map((survey, index) => (
+  return survey.map((survey, index) => (
     <div id="survey-container" key={index}>
       <div className="tabla">
         <div className="tabla_fila">
