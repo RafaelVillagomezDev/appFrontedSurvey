@@ -13,9 +13,7 @@ function ListSurvey() {
   const token = getLocalStorage("token");
 
   useEffect(() => {
-    dispatch(getSurvey(token))
-
-   
+    dispatch(getSurvey(token))   
   }, [dispatch]);
 
   const eliminar = (id_encuesta) => {
@@ -23,9 +21,7 @@ function ListSurvey() {
        token:token,
        id_encuesta:id_encuesta
     }
-    dispatch(deleteSurvey(obj)).then((resp)=>{
-       console.log(resp)
-    })
+    dispatch(deleteSurvey(obj))
   };
 
   return survey.map((survey, index) => (

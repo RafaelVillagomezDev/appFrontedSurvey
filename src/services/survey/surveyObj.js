@@ -22,7 +22,7 @@ const removeItemSurvey = async (obj) => {
   const {id_encuesta,token} = obj;
   const bearerToken = token;
 
-  const params = {
+  const params ={
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -32,11 +32,11 @@ const removeItemSurvey = async (obj) => {
 
   try {
     const response = await fetch(
-      `http://localhost:3445/api/v1/delete/${id_encuesta}`,
+      `http://localhost:3445/api/v1/survey/delete/${id_encuesta}`,
       params
     );
     const data = await response.json();
-    return data;
+    return data
   } catch (error) {
     console.error(error);
   }
