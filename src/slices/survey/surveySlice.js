@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   survey: [],
+  status:'idle'
 };
 
 export const getSurvey = createAsyncThunk(
@@ -31,7 +32,7 @@ export const deleteSurvey = createAsyncThunk(
 );
 
 export const surveySlice = createSlice({
-  name: "survey",
+  name: "surveyss",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -40,7 +41,9 @@ export const surveySlice = createSlice({
     });
     builder.addCase(getSurvey.fulfilled, (state, action) => {
       state.status = "success";
+
       state.survey = action.payload.data;
+      
     });
     builder.addCase(getSurvey.rejected, (state) => {
       state.status = "failed";
@@ -50,10 +53,8 @@ export const surveySlice = createSlice({
     });
     builder.addCase(deleteSurvey.fulfilled, (state, action) => {
       state.status = "success";
-     
-      let data = state.survey.filter((elem) => elem.id_encuesta !== action.payload.id_encuesta);
-      console.log(data);
-      state.survey = data;
+      const pos = state.survey.findIndex((elem) => elem.id_encuesta === action.payload.id)
+      state.survey.splice(pos, 1)
     });
     builder.addCase(deleteSurvey.rejected, (state) => {
       state.status = "failed";

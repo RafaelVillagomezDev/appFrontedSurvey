@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { deleteSurvey, getSurvey } from "../../slices/survey/surveySlice";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
 import { isUser } from "../../utils/auth/ProtectedRoutes";
+import { eliminarElemento } from "../../slices/survey/surveySlice";
 
 function ListSurvey() {
   const dispatch = useDispatch();
 
   const { survey } = useSelector((state) => state.survey);
-  const [encuesta, setEncuesta] = useState(survey);
+  const [surveyNew,setSurvey]=useState(survey)
 
   const token = getLocalStorage("token");
-
+   
   useEffect(() => {
-    dispatch(getSurvey(token))   
+
+      dispatch(getSurvey(token))
+      
+
   }, [dispatch]);
 
   const eliminar = (id_encuesta) => {
@@ -21,7 +25,9 @@ function ListSurvey() {
        token:token,
        id_encuesta:id_encuesta
     }
+   
     dispatch(deleteSurvey(obj))
+
   };
 
   return survey.map((survey, index) => (
