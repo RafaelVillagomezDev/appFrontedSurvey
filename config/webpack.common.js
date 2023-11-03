@@ -1,13 +1,18 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // Webpack configuration
 module.exports = {
+  entry:{
+    app:"./src/index.js"
+  },
+  target: ['web', 'es5'],
   stats: { children: true },
   output: {
     path: path.join(__dirname, "../dist"),
-    filename: "main.bundle-[hash].js",
+    filename: "[name].js",
     clean: true,
   },
 
@@ -20,8 +25,19 @@ module.exports = {
       template: path.join(__dirname, "../public", "index.html"),
       filename: "index.html",
     }),
+    new MiniCssExtractPlugin()
   ],
-
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        reactVendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
+          name: 'vendor-react',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   // LOADERS
   module: {
     rules: [
@@ -35,7 +51,7 @@ module.exports = {
       {
         test: /\.s?css$/, // archivos .css o .scss
         use: [
-          { loader: "style-loader" },
+          { loader: MiniCssExtractPlugin.loader },
           { loader: "css-loader" },
           { loader: "sass-loader" },
         ],

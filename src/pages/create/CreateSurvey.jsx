@@ -1,13 +1,15 @@
 import React from "react";
 import NavBar from "../../components/navBar/NavBar";
+import FormSurvey from "../../components/formSurvey/formSurvey";
+
+
+
 
 function CreateSurvey() {
   return (
      <>
       <NavBar />
-      <div id="create">
-        <h1>soy crear</h1>
-      </div>
+      <h1>pepedss</h1>
      </>
     
     

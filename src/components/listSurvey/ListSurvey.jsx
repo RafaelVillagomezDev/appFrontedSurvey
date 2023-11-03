@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { startTransition, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { deleteSurvey, getSurvey } from "../../slices/survey/surveySlice";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
@@ -10,12 +10,14 @@ function ListSurvey() {
 
   const { survey } = useSelector((state) => state.survey);
   const [surveyNew,setSurvey]=useState(survey)
-
+  const user = getLocalStorage("user");
   const token = getLocalStorage("token");
    
   useEffect(() => {
-
+    startTransition(()=>{
       dispatch(getSurvey(token))
+    })
+      
       
 
   }, [dispatch]);
@@ -80,13 +82,14 @@ function ListSurvey() {
           </div>
         </div>
       </div>
+      {user.rol == "admin" ? (
       <button
         type="button"
         onClick={() => eliminar(survey.Id_encuesta)}
         className="btn_mobile-remove"
       >
         <span>Eliminar Encuesta</span>
-      </button>
+      </button>):<></>}
     </div>
   ));
 }
