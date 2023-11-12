@@ -15,9 +15,9 @@ import routesApp from "./routes/routes";
 const Login = lazy(() => import("./pages/login/Login"));
 const Home = lazy(() => import("./pages/home/Home"));
 const CreateSurvey = lazy(() => import("./pages/create/CreateSurvey"));
+import { Navigate, Outlet } from "react-router-dom";
 import {
   isRol,
-  ProtectedRoutes,
   ProtectedRoutesAdmin,
 } from "./utils/auth/ProtectedRoutes";
 import { getLocalStorage } from "./utils/storage/saveLocalStorage";
@@ -27,21 +27,25 @@ import Update from "./pages/update/Update";
 const isToken = getLocalStorage("token") ? true : false;
 const authUser = isRol(getLocalStorage("token"), isToken);
 
+
+const ProtectedRoutes = ({ element, ...props }) => {
+  return isToken ? (
+    element
+  ) : (
+    <Navigate to="/login" replace state={{ from: props.location }} />
+  );
+};
+
+
+
 let routes = createRoutesFromElements(
   <>
-    <Route path="/" element={<Login />}>
-      <Route path="login" lazy={() => import("./pages/login/Login")} />
-      <Route path="/" lazy={() => import("./pages/login/Login")} />
+    <Route path="login" element={<Login/>}/>
+    <Route path="/">
+      <Route path="app" element={<ProtectedRoutes element={<Suspense><Home/></Suspense>}/>} />
+      <Route path="create" element={<ProtectedRoutes element={<Suspense><CreateSurvey/></Suspense>}/>} />
     </Route>
-    <Route element={<ProtectedRoutesAdmin adminPass={authUser} />}>
-      <Route
-        path="/app/create"
-        lazy={() => import("./pages/create/CreateSurvey")}
-      />
-    </Route>
-    <Route element={<ProtectedRoutes canPass={isToken} />}>
-      <Route path="/app" element={<Home />} />
-    </Route>
+
   </>
 );
 

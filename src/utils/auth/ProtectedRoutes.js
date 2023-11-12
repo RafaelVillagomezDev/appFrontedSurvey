@@ -5,15 +5,14 @@ import jwt_decode from "jwt-decode";
 
 
 
-const ProtectedRoutes = ({ canPass, redirectPath = "/login" }) => {
-  if (!canPass) {
-    return <Navigate to={redirectPath} replace />;
-
-  }
-
-  return <Outlet />;
-
+const ProtectedRoutes = ({ element, ...props }) => {
+  return fakeAuth.isAuthenticated ? (
+    element
+  ) : (
+    <Navigate to="/login" replace state={{ from: props.location }} />
+  );
 };
+
 
 const ProtectedRoutesAdmin = ({ adminPass, redirectPath = "/login" }) => {
   if (adminPass=="user" || adminPass==false) {

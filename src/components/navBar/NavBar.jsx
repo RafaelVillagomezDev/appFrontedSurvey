@@ -18,14 +18,14 @@ function NavBar() {
           </NavLink>
         </li>
         <li className="navbar_li">
-          <NavLink className="nav-route" to="/app/create">
+          <NavLink className="nav-route" to="/create">
             Crear
           </NavLink>
         </li>
         {user.rol == "admin" ? (
           <>
             <li className="navbar_li">
-              <NavLink className="nav-route" to="/app/update">
+              <NavLink className="nav-route" to="/update">
                 Actualizar
               </NavLink>
             </li>
