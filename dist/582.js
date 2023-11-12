@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkappfronted=self.webpackChunkappfronted||[]).push([[582],{582:function(e,n,t){t.r(n);var l=t(294),r=t(272);n.default=function(){return l.createElement(l.Fragment,null,l.createElement(r.Z,null),l.createElement("h1",null,"pepedss"))}}}]);
+//# sourceMappingURL=582.js.map
