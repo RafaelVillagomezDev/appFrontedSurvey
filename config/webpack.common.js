@@ -1,7 +1,7 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 // Webpack configuration
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
   stats: { children: true },
   output: {
     path: path.join(__dirname, "../dist"),
-    filename: "[name].js",
+    filename: "[name][contenthash].js",
     clean: true,
   },
 
@@ -24,8 +24,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "../public", "index.html"),
       filename: "index.html",
-    }),
-    new MiniCssExtractPlugin()
+    })
   ],
   optimization: {
     splitChunks: {
@@ -51,7 +50,7 @@ module.exports = {
       {
         test: /\.s?css$/, // archivos .css o .scss
         use: [
-          { loader: MiniCssExtractPlugin.loader },
+          { loader: "style-loader" },
           { loader: "css-loader" },
           { loader: "sass-loader" },
         ],

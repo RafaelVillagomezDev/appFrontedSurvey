@@ -1,5 +1,6 @@
 const common=require("./webpack.common")
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {merge}=require("webpack-merge")
 const devConfig={
     mode:process.env.NODE_ENV || "development",
@@ -12,6 +13,7 @@ const devConfig={
         hot:true,
         historyApiFallback: true,
       },
+
     devtool:"eval-source-map"
     
 }

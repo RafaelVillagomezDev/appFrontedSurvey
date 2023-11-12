@@ -40,10 +40,11 @@ const ProtectedRoutes = ({ element, ...props }) => {
 
 let routes = createRoutesFromElements(
   <>
+    <Route path="/" element={<Login/>}/>
     <Route path="login" element={<Login/>}/>
     <Route path="/">
-      <Route path="app" element={<ProtectedRoutes element={<Suspense><Home/></Suspense>}/>} />
-      <Route path="create" element={<ProtectedRoutes element={<Suspense><CreateSurvey/></Suspense>}/>} />
+      <Route path="app" element={<ProtectedRoutes element={<Suspense fallback={<div>Loading...</div>} ><Home/></Suspense>}/>} />
+      <Route path="create" element={<ProtectedRoutes element={<Suspense fallback={<div>Loading...</div>} ><CreateSurvey/></Suspense>}/>} />
     </Route>
 
   </>
