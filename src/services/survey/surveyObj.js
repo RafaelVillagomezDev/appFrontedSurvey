@@ -1,4 +1,6 @@
-const getListSurvey = async (objToken) => {
+import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
+
+export const getListSurvey = async (objToken) => {
   const bearerToken = objToken;
 
   const params = {
@@ -18,11 +20,11 @@ const getListSurvey = async (objToken) => {
   }
 };
 
-const removeItemSurvey = async (obj) => {
-  const {id_encuesta,token} = obj;
+export const removeItemSurvey = async (obj) => {
+  const { id_encuesta, token } = obj;
   const bearerToken = token;
 
-  const params ={
+  const params = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -36,13 +38,41 @@ const removeItemSurvey = async (obj) => {
       params
     );
     const data = await response.json();
-    return data
+    return data;
   } catch (error) {
     console.error(error);
   }
 };
 
-module.exports = {
-  getListSurvey,
-  removeItemSurvey,
+export const addSurvey = async (obj) => {
+  const { dni, producto, mantenimiento, tipo_mantenimiento, estado } = obj;
+  const token = getLocalStorage("token");
+
+  const bearerToken = token;
+
+  const params = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "BEARER " + bearerToken,
+    },
+
+    body: JSON.stringify({
+      dni: dni,
+      mantenimiento: mantenimiento,
+      tipo_mantenimiento: tipo_mantenimiento,
+      producto: producto,
+      estado: estado,
+      id_subproducto: "",
+    }),
+  };
+
+  try {
+    const response = await fetch("http://localhost:3445/api/v1/survey/create",params);
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 };

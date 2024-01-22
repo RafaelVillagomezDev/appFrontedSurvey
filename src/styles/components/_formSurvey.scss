@@ -1,0 +1,41 @@
+.formSurvey__container {
+  height: 60vh;
+  padding: 30px 20px;
+}
+.formSurvey__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formSurvey__box {
+  width: 100%;
+  max-width: 288px;
+  padding: 10px;
+  label {
+    line-height: 30px;
+  }
+  input {
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+    border: solid 1px black;
+  }
+  select{
+    width: 310px;
+    height: 40px;
+    border-radius:30px;
+    padding: 10px 20px;
+  }
+}
+
+button{
+    width:310px;
+    border: 0;
+    background-color: orange;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}

@@ -1,12 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  addSurvey,
   getListSurvey,
   removeItemSurvey,
 } from "../../services/survey/surveyObj";
-import {
-  getLocalStorage,
-  saveLocalStorage,
-} from "../../utils/storage/saveLocalStorage";
+
 
 const initialState = {
   survey: [],
@@ -21,6 +19,15 @@ export const getSurvey = createAsyncThunk(
   }
 );
 
+export const createSurvey = createAsyncThunk(
+  "surveySlice/createSurvey",
+  async (dataSurvey) => {
+    const data = await addSurvey(dataSurvey);
+    return data;
+  }
+);
+
+
 export const deleteSurvey = createAsyncThunk(
   "surveySlice/deleteSurvey",
   async (obj) => {
@@ -32,7 +39,7 @@ export const deleteSurvey = createAsyncThunk(
 );
 
 export const surveySlice = createSlice({
-  name: "surveyss",
+  name: "survey",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -43,7 +50,7 @@ export const surveySlice = createSlice({
       state.status = "success";
 
       state.survey = action.payload.data;
-      
+     
     });
     builder.addCase(getSurvey.rejected, (state) => {
       state.status = "failed";
@@ -55,8 +62,18 @@ export const surveySlice = createSlice({
       state.status = "success";
       const pos = state.survey.findIndex((elem) => elem.id_encuesta === action.payload.id)
       state.survey.splice(pos, 1)
+   
     });
     builder.addCase(deleteSurvey.rejected, (state) => {
+      state.status = "failed";
+    });
+    builder.addCase(createSurvey.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(createSurvey.fulfilled, (state, action) => {
+      state.status = "success";
+    });
+    builder.addCase(createSurvey.rejected, (state) => {
       state.status = "failed";
     });
   },

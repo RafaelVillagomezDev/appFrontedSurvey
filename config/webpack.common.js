@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // Webpack configuration
 module.exports = {
+  cache: false,
   entry:{
     app:"./src/index.js"
   },
@@ -24,6 +25,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "../public", "index.html"),
       filename: "index.html",
+      cache:false
     })
   ],
   optimization: {
