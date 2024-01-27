@@ -1,12 +1,16 @@
-import React from "react";
+import React, { startTransition } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
 function NavBar() {
   const user = getLocalStorage("user");
-
-  const salir = () => {
-    localStorage.clear();
+  const navigate = useNavigate();
+  const salir = (event) => {
+    startTransition(() => {
+      event.preventDefault();
+      navigate("/login");
+      localStorage.clear();
+    });
   };
 
   return (
@@ -30,12 +34,14 @@ function NavBar() {
               </NavLink>
             </li>
           </>
-        ) :<></>}
+        ) : (
+          <></>
+        )}
         <li className="navbar_li">
-            <NavLink className="nav-route" to="/login" onClick={salir}>
-              Salir
-            </NavLink>
-          </li>
+          <NavLink className="nav-route" to="/login" onClick={salir}>
+            Salir
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
