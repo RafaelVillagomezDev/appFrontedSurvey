@@ -1,10 +1,10 @@
-import React, { useState,startTransition} from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authUser, login } from "../../slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
 import { isRol } from "../../utils/auth/ProtectedRoutes";
-import toast from "react-hot-toast";
+
 
 function Login() {
 
@@ -18,23 +18,12 @@ function Login() {
   const loginUser = (event) => {
     event.preventDefault();
     const objLogin = { email: email, password: password };
-    
-    startTransition(()=>{
-      dispatch(authUser(objLogin)).then((data)=>{
-        const errores = data.payload.errors;
-        if (errores) {
-          errores.forEach((elem) => {
-            toast.error("Error :" + elem.msg);
-          });
-        } else {
-          toast.success(data.payload.data);
-        }
-          navigate("/app");
-      }).catch((err)=>{
-        toast.err(err)
-      });
-    })
-    
+    dispatch(authUser(objLogin)).then((result)=>{
+      if(result.payload){
+        navigate("/app");
+        window.location.reload()
+      }
+    });
 
     
   };

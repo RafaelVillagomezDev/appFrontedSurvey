@@ -9,12 +9,10 @@ const saveLocalStorage = (key, value) => {
 const getLocalStorage = (key) => {
   try {
     const item = window.localStorage.getItem(key);
-    if (item != "undefined") {
-      return JSON.parse(item);
-    }
+    return JSON.parse(item) ;
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 };
 
-export { saveLocalStorage, getLocalStorage };
+export { saveLocalStorage,getLocalStorage };
