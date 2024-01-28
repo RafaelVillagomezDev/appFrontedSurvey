@@ -10,7 +10,7 @@ function NavBar() {
     
       event.preventDefault()
       localStorage.clear();
-      navigate("/login");
+      navigate("/");
     
   };  
 
