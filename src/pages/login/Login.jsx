@@ -16,13 +16,12 @@ function Login() {
 
  
   const loginUser = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const objLogin = { email: email, password: password };
     dispatch(authUser(objLogin)).then((result)=>{
-      if(result.payload){
+      
         navigate("/app");
-        window.location.reload()
-      }
+      
     });
 
     

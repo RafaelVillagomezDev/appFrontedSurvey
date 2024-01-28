@@ -1,13 +1,18 @@
-import React from "react";
+import React,{startTransition}from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
 function NavBar() {
   const user = getLocalStorage("user");
+  const navigate = useNavigate();
 
-  const salir = () => {
-    localStorage.clear();
-  };
+  const salir = (event) => {
+    
+      event.preventDefault()
+      localStorage.clear();
+      navigate("/login");
+    
+  };  
 
   return (
     <div id="navbar">
