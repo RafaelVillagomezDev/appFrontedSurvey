@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { createSurvey } from "../../slices/survey/surveySlice";
-
+import { toast } from "react-toastify";
 
 
 function FormSurvey() {
@@ -10,7 +10,19 @@ function FormSurvey() {
   const crearEncuesta=(e)=>{
     e.preventDefault()
     const data=Object.fromEntries(new FormData(e.target))
-    dispath(createSurvey(data))
+    dispath(createSurvey(data)).then((data) => {
+      const errores = data.payload.errors;
+      if (errores) {
+        errores.forEach((elem) => {
+          toast.error("Error :" + elem.msg);
+        });
+      } else {
+        toast.success(data.payload.data);
+      }
+    })
+    .catch((err) => {
+      toast.error(err);
+    });
   }  
   return (
     <section className="formSurvey__container">

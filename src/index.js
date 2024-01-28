@@ -21,7 +21,8 @@ import {
   ProtectedRoutesAdmin,
 } from "./utils/auth/ProtectedRoutes";
 import { getLocalStorage } from "./utils/storage/saveLocalStorage";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Update from "./pages/update/Update";
 
 const isToken = getLocalStorage("token") ? true : false;
@@ -56,6 +57,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Provider store={store}>
+   <ToastContainer autoClose={2000} />
     <React.StrictMode>
       <RouterProvider router={router} />
     </React.StrictMode>

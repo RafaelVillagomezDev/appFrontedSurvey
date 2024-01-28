@@ -4,7 +4,7 @@ import { authUser, login } from "../../slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
 import { isRol } from "../../utils/auth/ProtectedRoutes";
-
+import { toast } from "react-toastify";
 
 function Login() {
 
@@ -18,10 +18,18 @@ function Login() {
   const loginUser = (event) => {
     event.preventDefault()
     const objLogin = { email: email, password: password };
-    dispatch(authUser(objLogin)).then((result)=>{
-      
+    dispatch(authUser(objLogin)).then((data)=>{
+      const errores = data.payload.errors;
+      if (errores) {
+        errores.forEach((elem) => {
+          toast.error("Error :" + elem.msg);
+        });
+      } else {
+        toast.success(data.payload.data);
+      }
         navigate("/app");
-      
+    }).catch((err)=>{
+      toast.err(err)
     });
 
     
