@@ -1,21 +1,24 @@
-
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin =require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
+const envPath = path.resolve(__dirname, ".env");
+  
 // Webpack configuration
 module.exports = {
-  cache: false,
-  entry:{
-    app:"./src/index.js"
-  },
-  target: ['web', 'es5'],
   stats: { children: true },
+  watchOptions: {
+    aggregateTimeout: 200,
+    poll: 1000,
+  },
   output: {
     path: path.join(__dirname, "../dist"),
-    filename: "[name][contenthash].js",
+    filename: "main.bundle-[hash].js",
     clean: true,
+
   },
+  
 
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".html"],
@@ -23,22 +26,14 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "../public", "index.html"),
+      template: path.join(__dirname, "../src", "index.html"),
       filename: "index.html",
-      cache:false
-    })
+      hash:true
+    }),
+    new MiniCssExtractPlugin(),
+    
   ],
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        reactVendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
-          name: 'vendor-react',
-          chunks: 'all',
-        },
-      },
-    },
-  },
+
   // LOADERS
   module: {
     rules: [
@@ -50,12 +45,25 @@ module.exports = {
         },
       },
       {
-        test: /\.s?css$/, // archivos .css o .scss
+        test: /\.(pdf)$/,
         use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-          { loader: "sass-loader" },
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'public/assets/pdf/',
+            },
+          },
         ],
+      },
+      {
+        test: /\.s?css$/, // archivos .css o .scss
+        use:[
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader"
+        ]
+        
       },
       {
         test: /\.(png|jpg|gif)$/,

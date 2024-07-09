@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
+
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -42,7 +43,7 @@ const ProtectedRoutes = ({ element, ...props }) => {
 let routes = createRoutesFromElements(
   <>
     <Route path="/" element={<Login/>}/>
-    <Route path="login" element={<Login/>}/>
+    <Route path="/login" element={<Login/>}/>
     <Route path="/">
       <Route path="app" element={<ProtectedRoutes element={<Suspense fallback={<div>Loading...</div>} ><Home/></Suspense>}/>} />
       <Route path="create" element={<ProtectedRoutes element={<Suspense fallback={<div>Loading...</div>} ><CreateSurvey/></Suspense>}/>} />

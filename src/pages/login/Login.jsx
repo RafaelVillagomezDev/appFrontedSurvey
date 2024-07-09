@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
 import { isRol } from "../../utils/auth/ProtectedRoutes";
 import { toast } from "react-toastify";
+import PortadaLogin from "../../../public/assets/img/Portada_login.jpg"
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Login() {
 
@@ -37,9 +39,15 @@ function Login() {
 
   return (
     <div id="main">
-      <div className="main_div-title">
-        <h1>APP ENCUESTAS</h1>
+      <div id="main_container-portada">
+      <LazyLoadImage src={PortadaLogin}
+         id="img_portada"
+        alt="Portada gas"
+      />
+
       </div>
+      <div id="main_container_form">
+      
       <form id="form">
         <div className="form_div">
           <div className="form_div-group">
@@ -73,6 +81,8 @@ function Login() {
           </button>
         </div>
       </form>
+      </div>
+     
     </div>
   );
 }
