@@ -26,10 +26,9 @@ function Login() {
         errores.forEach((elem) => {
           toast.error("Error :" + elem.msg);
         });
-      } 
-
+      }     
+    }).then(()=>{
       navigate("app");
-       
     }).catch((err)=>{
       toast.err(err)
     });
@@ -42,7 +41,7 @@ function Login() {
       <div id="main_container-portada">
       <LazyLoadImage src={PortadaLogin}
          id="img_portada"
-        alt="Portada gas"
+         alt="Portada gas"
       />
 
       </div>

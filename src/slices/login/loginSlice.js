@@ -8,6 +8,7 @@ import { saveLocalStorage } from "../../utils/storage/saveLocalStorage";
 
 const initialState={
     user:[],
+    isAuthenticated: false,
     
 }
 
@@ -40,6 +41,7 @@ export const loginSlice=createSlice({
             // }
             // state.user=userFecth
             state.user=action.payload.data
+            state.isAuthenticated=true
             saveLocalStorage('user',action.payload.data)
             
           })

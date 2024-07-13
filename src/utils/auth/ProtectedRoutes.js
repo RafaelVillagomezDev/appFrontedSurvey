@@ -1,15 +1,19 @@
 import { Navigate, Outlet } from "react-router-dom";
 import React from "react";
 import jwt_decode from "jwt-decode";
+import { getLocalStorage } from "../storage/saveLocalStorage";
 
 
 
 
 const ProtectedRoutes = ({ element, ...props }) => {
-  return fakeAuth.isAuthenticated ? (
-    element
+
+  const isToken=getLocalStorage("token")?true:false;
+
+  return isToken ? (
+    <Outlet/>
   ) : (
-    <Navigate to="/login" replace state={{ from: props.location }} />
+    <Navigate to="/" replace state={{ from: props.location }} />
   );
 };
 
