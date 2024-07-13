@@ -26,10 +26,10 @@ function Login() {
         errores.forEach((elem) => {
           toast.error("Error :" + elem.msg);
         });
-      } else {
-        toast.success(data.payload.data);
-      }
-        navigate("/app");
+      } 
+
+      navigate("app");
+       
     }).catch((err)=>{
       toast.err(err)
     });
