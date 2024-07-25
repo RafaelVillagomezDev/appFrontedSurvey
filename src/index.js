@@ -17,10 +17,11 @@ import { getLocalStorage } from "./utils/storage/saveLocalStorage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoutes, isRol } from "./utils/auth/ProtectedRoutes";
-import Login from "./pages/login/Login";
-import Home from "./pages/home/Home";
-import CreateSurvey from "./pages/create/CreateSurvey";
-import Update from "./pages/update/Update";
+const Login =lazy(()=>import("./pages/login/Login")) ;
+const Home  = lazy (()=>import("./pages/home/Home"));
+const CreateSurvey = lazy(()=>import("./pages/create/CreateSurvey"));
+const Update =lazy(()=>import("./pages/update/Update"));
+const  Error = lazy(()=>import("./pages/error/Error"));
 
 // Verificar si hay un token en el almacenamiento local
 // const isToken = getLocalStorage("token") ? true : false;
@@ -44,8 +45,9 @@ const routes =createRoutesFromElements(
    <>
     <Route path="/" element={<Login />} />
     <Route path="login" element={<Login />} />
+    <Route path="*" element={<Error/>} />
     <Route path="/" element={<ProtectedRoutes/>}>
-      <Route path="app" element={<Home />}/>
+      <Route path="app" element={<Home/>}/>
       <Route path="create" element={<CreateSurvey />} />
       <Route path="update" element={<Update />} />
     </Route>
