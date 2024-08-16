@@ -23,22 +23,7 @@ const CreateSurvey = lazy(()=>import("./pages/create/CreateSurvey"));
 const Update =lazy(()=>import("./pages/update/Update"));
 const  Error = lazy(()=>import("./pages/error/Error"));
 
-// Verificar si hay un token en el almacenamiento local
-// const isToken = getLocalStorage("token") ? true : false;
 
-// // Verificar el rol del usuario basado en el token
-// const authUser = isRol(getLocalStorage("token"), isToken);
-
-
-// Componente para proteger rutas
-// const ProtectedRoutes = ({ element }) => {
-//   const location=useLocation()
-//   return isToken ? (
-//     element
-//   ) : (
-//     <Navigate to="/" replace  state={{ from: location }}  />
-//   );
-// };
 
 // Definir las rutas utilizando createRoutesFromElements
 const routes =createRoutesFromElements(

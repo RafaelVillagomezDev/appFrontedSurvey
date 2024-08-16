@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkappfronted=self.webpackChunkappfronted||[]).push([[316],{316:(e,n,t)=>{t.r(n),t.d(n,{default:()=>r});var a=t(294);const r=function(){return a.createElement("div",{id:"navlogin_container"},a.createElement("h1",null,"login"))}}}]);
+//# sourceMappingURL=316.b6c4866ee371a5172a20.chunk.js.map

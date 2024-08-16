@@ -1,36 +1,60 @@
-@import "../mixin";
-/*Mobile*/
+@import "../components/formSurvey";
+@import "../components/navlogin";
+@import '../mixin';
+@import '../base/base';
+
+#wrapper{
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Ocupa el espacio disponible entre el header y el footer */
+  min-height: 100vh;
+}
 
 #main {
-  background-color: white;
-  width: 100%;
-  height: 100vh;
+  background-color: $base;
+  flex: 1; 
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 2rem;
 }
+
+#main_container{
+   display: flex;
+   gap: 2rem;
+   justify-content: space-around;
+}
+
 
 #main_container-portada {
   display: none;
   @include media(sm) {
-    width: 50%;
     font-size: 32px;
     font-weight: 800;
-    color: black;
+    color: $base_text;
     display: flex;
     align-items: center;
   }
 }
 
 #main_container_form {
-  width: 100%;
+  border: solid 1px gray;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  h1{
+    font-family:$base_font-geo;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-size: $base_size-lg;
+    color: $base_text-blue;
+  }
+
+  
+
   @include media(sm) {
-    width: 50%;
+    margin: 0px;
     display: flex;
     justify-content: center;
   }
@@ -40,7 +64,8 @@
   display: none;
   @include media(sm) {
     width: 100%;
-    height: 100vh;
+    height:auto;
+    max-height: 500px;
     object-fit: cover;
     object-position: left;
     display: block;
@@ -49,11 +74,12 @@
 
 #form {
   display: flex;
+  font-family:$base_font-geo;
+  font-size: $base_size;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   max-width: 380px;
-  height: 450px;
   border-radius: 12px;
   @include media(sm) {
     height: 400px;
@@ -73,7 +99,7 @@
   display: flex;
   flex-direction: column;
   font-size: 18px;
-
+  font-family: $base_font-geo;
   label {
     padding-bottom: 12px;
     color: white;
@@ -90,7 +116,7 @@
 
 .form_btn-submit {
   border-radius: 4px;
-  background-color: #009900;
+  background-color: $base_text-violet;
   outline: none;
   padding: 12px;
   border: 0;

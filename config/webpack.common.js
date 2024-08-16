@@ -30,7 +30,11 @@ module.exports = {
       filename: "index.html",
       hash:true
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin(
+      {
+        filename: '[name].css', // Genera un archivo CSS por entrada
+      }
+    ),
     
   ],
 
@@ -66,7 +70,7 @@ module.exports = {
         
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|webp)$/,
         use: [
           {
             loader: "file-loader",

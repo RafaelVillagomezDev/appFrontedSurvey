@@ -1,3 +1,7 @@
+@import '../mixin';
+@import '../base/base';
+@import "../components/navbar";
+
 #survey-container{
     display: block;
     @include media(sm) {

@@ -1,8 +1,6 @@
 @import './mixin.scss';
-@import './components.scss' ;
-@import './components/form.scss' ;
-@import './components/formSurvey.scss' ;
-@import './pages/login.scss' ;
-@import './pages/home.scss' ;
-@import './pages/error';
-@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Righteous&display=swap');
+@import './reset.scss';
+@import './normalize.scss';
+@import './base/base.scss';
+@import './components/footer.scss' ;
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Finlandica:ital,wght@0,400..700;1,400..700&family=Geologica:wght@100..900&family=Phudu:wght@300..900&display=swap');
