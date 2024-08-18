@@ -7,8 +7,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 function Footer() {
   return (
     <div id="container_footer">
-      <div>
-        <div className="box_footer">
+      
+        <div className="box_footer-title">
           <a href="https://yandrydev.es/home" target="_blank">YandryDev</a>
         </div>
         <div className="box_footer">
@@ -19,9 +19,12 @@ function Footer() {
             <li>
               <a href="">FAQs</a>
             </li>
+            <li>
+              <a href="">Register</a>
+            </li>
           </ul>
         </div>
-        <div className="box_footer-line">
+        <div id="box_footer-line">
           <ul className="list_footer-social">
             <li>
               <a
@@ -49,7 +52,7 @@ function Footer() {
             </li>
           </ul>
         </div>
-      </div>
+      
     </div>
   );
 }

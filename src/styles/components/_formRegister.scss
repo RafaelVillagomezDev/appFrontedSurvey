@@ -1,0 +1,128 @@
+#container_main-flex {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  width: 100%;
+  align-items: center;
+  gap: 2rem;
+  h1 {
+    font-size: $base_size-lg;
+    font-family: $base_font-geo;
+    text-align: center;
+    font-weight: bold;
+    color: $base_text-blue;
+    text-align: center;
+  }
+}
+
+.box_text {
+  font-size: $base_size;
+  font-family: $base_font-geo;
+  color: $base_text;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.btn_login {
+  border-radius: 4px;
+  background-color: $base_text-ocean;
+  outline: none;
+  padding: 12px;
+  border: 0;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.box_option-choice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+  justify-content: center;
+  div {
+    height: 1px;
+    width: 100%;
+    background-color: gray;
+    @include media(sm) {
+      width: 145px;
+    }
+  }
+}
+
+#form {
+  display: flex;
+  font-family: $base_font-geo;
+  font-size: $base_size;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 12px;
+  padding-bottom: 1rem;
+  @include media(sm) {
+    width: 100%;
+  }
+}
+
+.form_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2rem;
+  @include media(sm) {
+    padding: 1.7rem;
+  }
+}
+
+.form_div-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  font-family: $base_font-geo;
+  label {
+    padding-bottom: 12px;
+    color: white;
+    font-size: 18px;
+  }
+  input {
+    font-family: $base_font-geo;
+    border: 0;
+    background-color: white;
+    outline: none;
+    padding: 16px;
+    border-bottom: solid gray 2px;
+  }
+}
+
+
+
+.form_input-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 18px;
+  font-family: $base_font-geo;
+  label {
+    color: $base_text;
+    font-size: 18px;
+  }
+}
+
+.form_btn-submit {
+  border-radius: 4px;
+  background-color: $base_text-violet;
+  outline: none;
+  padding: 12px;
+  border: 0;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}

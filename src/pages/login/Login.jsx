@@ -9,6 +9,7 @@ import PortadaLogin from "../../../public/assets/img/Portada_login.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Footer = lazy(() => import("../../components/footer/Footer"));
+
 const NavBarLogin = lazy(() =>
   import("../../components/navBarLogin/NavBarLogin")
 );
@@ -27,6 +28,11 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+
+  const navigateRegister=()=>{
+     navigate("/register")
+  } 
+
   const loginUser = (event) => {
     event.preventDefault();
     const objLogin = { email: email, password: password };
@@ -40,7 +46,7 @@ function Login() {
         }
       })
       .then(() => {
-        navigate("app");
+        navigate("/app");
       })
       .catch((err) => {
         toast.err(err);
@@ -58,6 +64,7 @@ function Login() {
               alt="Portada"
               height={80}
             />
+            
           </div>
           <div id="main_container_form">
             <h1>ClickSurvey</h1>
@@ -98,6 +105,12 @@ function Login() {
                 </button>
               </div>
             </form>
+            <div id="main_container-register">
+              <span>o</span>
+              <p className="main_box-register">
+                 <span>¿No tienes una cuenta? <a onClick={navigateRegister}>Registrate</a></span> 
+              </p>
+            </div>
           </div>
         </div>
       </div>

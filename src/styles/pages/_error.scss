@@ -1,47 +1,50 @@
 @import "../mixin";
+@import "../base/base";
 
-#container_main{
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    gap: 2rem;
-    @include media(md){
-        flex-direction: row;
-        height: 90vh;
-    }
+#container_main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: fit-content;
+  @include media(md) {
+    flex-direction: row;
+    height: 100vh;
+  }
 }
 
-
-#box_img{
-
-
-    img{
-        width: 100%;
-        height: 100%;
+#box_img {
+  flex: 1;
+  img {
+    width: 100%;
+    height: 100%;
+    @include media(md) {
+      width: 100%;
+      height: 100%;
     }
-    
+  }
 }
 
-#box_content{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    font-size: 45px;
+#box_content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
 
-    button{
-        padding:1rem;
-        background-color: black;
-        font-size: 20px;
-        cursor: pointer;
+  button {
+    padding: 1rem;
+    background-color: $base_text-blue;
+    font-size: 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  h1 {
+    font-size: $base_size-lg;
+    @include media(md) {
+      font-size: 100px;
     }
-    @include media(md){
-
-        h1{
-            font-size: 100px;
-        }
-
-    }
-   
+  }
 }

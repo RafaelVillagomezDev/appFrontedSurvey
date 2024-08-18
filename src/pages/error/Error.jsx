@@ -3,12 +3,18 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import ErrorMonsterImg from "../../../public/assets/img/Portada_error.jpg"
 import { useNavigate } from "react-router-dom";
 
+import("../../styles/pages/_error.scss").then(() => {
+  console.log("Error styles loaded");
+});
+
 function Error() {
+
+
 
   const navigate = useNavigate();
 
   const navigateHome=()=>{
-      navigate("app")
+      navigate("/login")
   }
 
     return (

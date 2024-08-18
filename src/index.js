@@ -17,6 +17,7 @@ import { getLocalStorage } from "./utils/storage/saveLocalStorage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoutes, isRol } from "./utils/auth/ProtectedRoutes";
+const Register=lazy(()=>import("./pages/register/Register"))
 const Login =lazy(()=>import("./pages/login/Login")) ;
 const Home  = lazy (()=>import("./pages/home/Home"));
 const CreateSurvey = lazy(()=>import("./pages/create/CreateSurvey"));
@@ -31,6 +32,7 @@ const routes =createRoutesFromElements(
     <Route path="/" element={<Login />} />
     <Route path="login" element={<Login />} />
     <Route path="*" element={<Error/>} />
+    <Route path="register" element={<Register/>} />
     <Route path="/" element={<ProtectedRoutes/>}>
       <Route path="app" element={<Home/>}/>
       <Route path="create" element={<CreateSurvey />} />

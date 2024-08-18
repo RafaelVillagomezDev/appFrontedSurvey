@@ -2,21 +2,29 @@
   padding: 2rem;
   display: flex;
   justify-content: center;
-  align-items: center;
-  div {
-    gap: 2rem;
-    display: flex;
-    justify-content: center;
-  }
+  gap:2rem;
+  width: 100%;
 }
 
 .box_footer {
   display: flex;
+  align-items: center;
+  gap: 2rem;
   column-gap: 0.5rem;
   font-size: $base_size-title;
-  a:first-child {
-    color: $base_text;
+  
+
+  a:hover {
+    color: $base_text-blue
+  }
+}
+
+.box_footer-title{
+
+  a{
     text-decoration: none;
+    font-size: $base_size-title;
+    color:$base_text;
     font-weight: bold;
   }
 
@@ -26,9 +34,13 @@
 }
 
 .list_footer {
+  display: flex;
+  flex-direction: row;
   font-size: $base_size;
   font-family: $base_font-geo;
   list-style: none;
+  gap: 2rem;
+
   li:first-child {
     font-weight: bold;
   }
@@ -47,9 +59,13 @@
   }
 }
 
-.box_footer-line {
-  display: flex;
-  align-items: center;
+#box_footer-line {
+  display: none;
+
+  @include media(sm) {
+    display: block;
+  }
+
 }
 
 .list_footer-social {
