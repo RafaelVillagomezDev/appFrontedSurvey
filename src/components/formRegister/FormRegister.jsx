@@ -1,7 +1,8 @@
 import React, { lazy, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DOMPurify from 'dompurify';
-
+import MySwal from "sweetalert2";
+import { registerUser } from "../../services/auth/registerUser";
 
 function FormRegister() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function FormRegister() {
   };
 
   const [formData, setFormData] = useState({
-    name: "",
+    name_user: "",
     surname: "",
     email: "",
     password: "",
@@ -26,19 +27,20 @@ function FormRegister() {
       msg: "El formato del correo electrónico es inválido.",
     },
     {
-      field: "name",
-      regex: /^[A-Za-z0-9]*$/,
-      msg: "El asunto debe tener numeros o letras , no se permiten caracteres especiales.",
+      field: "name_user",
+      regex: /^[A-Za-z0-9]{4,}$/
+      ,
+      msg: "El nombre debe tener letras mayusculas o minusculas y al menos 4 caracteres, no se permiten caracteres especiales.",
     },
     {
       field: "surname",
-      regex: /^[A-Za-z0-9]*$/,
-      msg: "El asunto debe tener numeros o letras , no se permiten caracteres especiales.",
+      regex: /^[A-Za-z0-9]{4,}$/,
+      msg: "El apellido debe tener letras mayusculas o minusculas y al menos 4 caracteres , no se permiten caracteres especiales.",
     },
     {
       field: "password",
-      regex: /^[A-Za-z0-9]*$/,
-      msg: "El asunto debe tener numeros o letras , no se permiten caracteres especiales.",
+      regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@*?#$%^&+=!]).{8,20}$/,
+      msg: "La contraseña debe tener entre 8 y 20 caracteres, e incluir al menos una letra mayúscula, una letra minúscula, un dígito y un carácter especial.",
     },
   ];
 
@@ -70,6 +72,34 @@ function FormRegister() {
     }));
 
   };
+
+
+  const submitRegister=async (event) => {
+    event.preventDefault();
+
+    try {
+     
+      const response = await registerUser(formData)
+      
+      MySwal.fire({
+        icon: "success",
+        title: "Gracias!",
+        text: response.messague,
+      })
+      
+      navigate("/app");
+
+     
+    } catch (error) {
+      MySwal.fire({
+        icon: "error",
+        title: "Error",
+        text: error,
+      })
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <div id="container_main-flex">
@@ -88,24 +118,25 @@ function FormRegister() {
         <form id="form">
           <div className="form_div">
             <div className="form_div-group">
-              <label htmlFor="name">Nombre</label>
+              <label htmlFor="name_user">Nombre</label>
               <input
-                id="name"
-                type="name"
+                id="name_user"
+                type="text"
                 maxLength={50}
-                name="name"
-                autoComplete="name"
+                name="name_user"
+                autoComplete="name_user"
                 placeholder="Nombre"
                 value={formData.name}
                 onChange={handleChange}
                 required
               />
+               { errors.name_user && <p>{errors.name_user}</p>}
             </div>
             <div className="form_div-group">
-              <label htmlFor="name">Apellido</label>
+              <label htmlFor="surname">Apellido</label>
               <input
                 id="surname"
-                type="surname"
+                type="text"
                 maxLength={50}
                 name="surname"
                 autoComplete="surname"
@@ -114,6 +145,7 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+                { errors.surname && <p>{errors.surname}</p>}
             </div>
             <div className="form_div-group">
               <label htmlFor="email">Email</label>
@@ -128,6 +160,7 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+                  { errors.email && <p>{errors.email}</p>}
             </div>
             <div className="form_div-group">
               <label htmlFor="password">Password</label>
@@ -142,6 +175,7 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+               { errors.password && <p>{errors.password}</p>}
             </div>
             <div className="form_input-group">
               <input
@@ -153,7 +187,7 @@ function FormRegister() {
               />
               <label htmlFor="privacy_policy">Politica de privacidad</label>
             </div>
-            <button className="form_btn-submit" type="submit">
+            <button className="form_btn-submit" type="submit" value={"registrar"} onClick={submitRegister}>
               Register
             </button>
           </div>

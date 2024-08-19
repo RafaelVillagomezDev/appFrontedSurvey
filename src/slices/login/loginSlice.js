@@ -33,13 +33,6 @@ export const loginSlice=createSlice({
           })
           .addCase(authUser.fulfilled, (state, action) => {
             state.status = 'success'
-            // const userCopy={...initialState,...action.payload}
-            // const userFecth={
-            //     name:userCopy.data.name,
-            //     user_name:userCopy.data.surname,
-            //     rol:userCopy.data.rol
-            // }
-            // state.user=userFecth
             state.user=action.payload.data
             state.isAuthenticated=true
             saveLocalStorage('user',action.payload.data)

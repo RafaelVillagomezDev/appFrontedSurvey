@@ -43,6 +43,8 @@ export const surveySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+
+    //Obtener encuestas
     builder.addCase(getSurvey.pending, (state) => {
       state.status = "loading";
     });
@@ -55,6 +57,8 @@ export const surveySlice = createSlice({
     builder.addCase(getSurvey.rejected, (state) => {
       state.status = "failed";
     });
+
+    //Eliminar encuestas
     builder.addCase(deleteSurvey.pending, (state) => {
       state.status = "loading";
     });
@@ -67,6 +71,8 @@ export const surveySlice = createSlice({
     builder.addCase(deleteSurvey.rejected, (state) => {
       state.status = "failed";
     });
+
+     //Crear encuestas
     builder.addCase(createSurvey.pending, (state) => {
       state.status = "loading";
     });
@@ -76,6 +82,7 @@ export const surveySlice = createSlice({
     builder.addCase(createSurvey.rejected, (state) => {
       state.status = "failed";
     });
+    
   },
 });
 export const {} = surveySlice.actions;
