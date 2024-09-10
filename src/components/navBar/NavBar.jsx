@@ -1,17 +1,19 @@
-import React, { startTransition } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
 import { FaAlignJustify } from "react-icons/fa6";
+import MenuBurguer from "../menuBurguer/MenuBurguer";
 
 function NavBar() {
-  const user = getLocalStorage("user");
   const navigate = useNavigate();
-
+  const [isOpen, setIsOpen] = useState(false);
   const salir = (event) => {
     event.preventDefault();
     localStorage.clear();
     navigate("/");
+  };
+
+  const handleClose = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -21,31 +23,26 @@ function NavBar() {
           <h1 id="navbar_title">ClickSurvey</h1>
         </div>
         <div id="navbar_header-main" className="navbar_box">
-          <ul className="navbar_ul">
+          <menu className="navbar_ul">
             <li className="navbar_li">
               <NavLink className="nav-route" to="/app">
-                Home
+                Encuestas
               </NavLink>
             </li>
             <li className="navbar_li">
               <NavLink className="nav-route" to="/create">
-                Crear
+                Productos
               </NavLink>
             </li>
-         
-            <li className="navbar_li">
-              <NavLink className="nav-route" to="/login" onClick={salir}>
-                Salir
-              </NavLink>
-            </li>
-          </ul>
+          </menu>
         </div>
         <div className="navbar_box">
-          <button className="navbar_btn">
+          <button className="navbar_btn" onClick={handleClose}>
             <FaAlignJustify />
           </button>
         </div>
       </div>
+      <MenuBurguer isOpen={isOpen} handleClose={handleClose} />
     </div>
   );
 }

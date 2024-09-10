@@ -73,8 +73,8 @@ td {
 }
 body {
   line-height: 1;
-  color: black;
-  background: white;
+  color: $base_text;
+  background: $base_white;
   display: flex;
   flex-direction: column;
  
