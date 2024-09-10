@@ -11,10 +11,6 @@ function Home() {
   return (
     <>
       <NavBar />
-      <div id="home">
-        <h1>Lista de encuestas</h1>
-        <ListSurvey />
-      </div>
     </>
   );
 }

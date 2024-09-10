@@ -1,5 +1,5 @@
 const registerUser = async (obj) => {
-    const { email, name_user, surname, password } = obj;
+    const { email, name_user,dni, surname, password,birthday } = obj;
   
     const params = {
       method: 'POST',
@@ -9,8 +9,11 @@ const registerUser = async (obj) => {
       body: JSON.stringify({
         email: email,
         name_user: name_user,
+        dni:dni,
         surname: surname,
-        password: password
+        password: password,
+        birthday:birthday,
+        id_rol:"1"
       })
     };
   
@@ -30,9 +33,8 @@ const registerUser = async (obj) => {
       const data = await response.json();
       return data;
     } catch (error) {
-      // Manejo de errores
-      console.error('Error durante el registro:', error.message);
-      throw error; // Puedes volver a lanzar el error para que sea manejado por el código que llama a esta función
+     
+      throw new Error(error); // Puedes volver a lanzar el error para que sea manejado por el código que llama a esta función
     }
   };
   

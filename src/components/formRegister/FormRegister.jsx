@@ -1,6 +1,6 @@
 import React, { lazy, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 import MySwal from "sweetalert2";
 import { registerUser } from "../../services/auth/registerUser";
 
@@ -14,8 +14,10 @@ function FormRegister() {
   const [formData, setFormData] = useState({
     name_user: "",
     surname: "",
+    dni: "",
     email: "",
     password: "",
+    birthday: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -28,8 +30,7 @@ function FormRegister() {
     },
     {
       field: "name_user",
-      regex: /^[A-Za-z0-9]{4,}$/
-      ,
+      regex: /^[A-Za-z0-9]{4,}$/,
       msg: "El nombre debe tener letras mayusculas o minusculas y al menos 4 caracteres, no se permiten caracteres especiales.",
     },
     {
@@ -38,9 +39,20 @@ function FormRegister() {
       msg: "El apellido debe tener letras mayusculas o minusculas y al menos 4 caracteres , no se permiten caracteres especiales.",
     },
     {
+      field: "dni",
+      regex: /^\d{8}[A-HJ-NP-TV-Z]$/,
+      regex_plus: /^[XYZ]\d{7}[A-HJ-NP-TV-Z]$/,
+      msg: "El Dni o Nie es invalido",
+    },
+    {
       field: "password",
       regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@*?#$%^&+=!]).{8,20}$/,
       msg: "La contraseña debe tener entre 8 y 20 caracteres, e incluir al menos una letra mayúscula, una letra minúscula, un dígito y un carácter especial.",
+    },
+    {
+      field: "birthday",
+      regex: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/,
+      msg: "Fecha de nacimiento invalida",
     },
   ];
 
@@ -48,7 +60,13 @@ function FormRegister() {
     const pattern = regexPatterns.find((rule) => rule.field === name);
 
     if (pattern && value.length > 0) {
-      return pattern.regex.test(value) ? "" : pattern.msg;
+      if (pattern.regex_plus) {
+        return pattern.regex.test(value) || pattern.regex_plus.test(value)
+          ? ""
+          : pattern.msg;
+      } else {
+        return pattern.regex.test(value) ? "" : pattern.msg;
+      }
     }
     return "";
   };
@@ -56,7 +74,7 @@ function FormRegister() {
   // Función para manejar cambios en los campos del formulario
   const handleChange = (event) => {
     const { name, value } = event.target;
-    
+
     // Validar el campo actual
     const errorMsg = validateField(name, DOMPurify.sanitize(value));
 
@@ -70,32 +88,26 @@ function FormRegister() {
       ...prevValues,
       [name]: value,
     }));
-
   };
 
-
-  const submitRegister=async (event) => {
+  const submitRegister = async (event) => {
     event.preventDefault();
 
     try {
-     
-      const response = await registerUser(formData)
-      
+      const response = await registerUser(formData);
+
       MySwal.fire({
         icon: "success",
-        title: "Gracias!",
+        title: "Se ha creado con exito su cuenta , vuelva a iniciar sesion",
         text: response.messague,
-      })
-      
-      navigate("/app");
+      });
 
-     
     } catch (error) {
       MySwal.fire({
         icon: "error",
         title: "Error",
         text: error,
-      })
+      });
       console.error("Error:", error);
     }
   };
@@ -130,7 +142,9 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
-               { errors.name_user && <p>{errors.name_user}</p>}
+              {errors.name_user && (
+                <p className="error_text">{errors.name_user}</p>
+              )}
             </div>
             <div className="form_div-group">
               <label htmlFor="surname">Apellido</label>
@@ -145,7 +159,22 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
-                { errors.surname && <p>{errors.surname}</p>}
+              {errors.surname && <p className="error_text">{errors.surname}</p>}
+            </div>
+            <div className="form_div-group">
+              <label htmlFor="surname">Dni o Nie</label>
+              <input
+                id="dni"
+                type="text"
+                maxLength={9}
+                name="dni"
+                autoComplete="dni"
+                placeholder="Dni o Nie"
+                value={formData.dni}
+                onChange={handleChange}
+                required
+              />
+              {errors.dni && <p className="error_text">{errors.dni}</p>}
             </div>
             <div className="form_div-group">
               <label htmlFor="email">Email</label>
@@ -160,7 +189,24 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
-                  { errors.email && <p>{errors.email}</p>}
+              {errors.email && <p className="error_text">{errors.email}</p>}
+            </div>
+            <div className="form_div-group">
+              <label htmlFor="birthday">Fecha de nacimiento</label>
+              <input
+                id="birthday"
+                type="date"
+                maxLength={50}
+                name="birthday"
+                autoComplete="birthday"
+                placeholder="birthday"
+                value={formData.birthday}
+                onChange={handleChange}
+                required
+              />
+              {errors.birthday && (
+                <p className="error_text">{errors.birthday}</p>
+              )}
             </div>
             <div className="form_div-group">
               <label htmlFor="password">Password</label>
@@ -175,7 +221,9 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
-               { errors.password && <p>{errors.password}</p>}
+              {errors.password && (
+                <p className="error_text">{errors.password}</p>
+              )}
             </div>
             <div className="form_input-group">
               <input
@@ -187,7 +235,12 @@ function FormRegister() {
               />
               <label htmlFor="privacy_policy">Politica de privacidad</label>
             </div>
-            <button className="form_btn-submit" type="submit" value={"registrar"} onClick={submitRegister}>
+            <button
+              className="form_btn-submit"
+              type="submit"
+              value={"registrar"}
+              onClick={submitRegister}
+            >
               Register
             </button>
           </div>

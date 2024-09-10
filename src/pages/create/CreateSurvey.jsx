@@ -10,7 +10,7 @@ function CreateSurvey() {
   return (
      <>
       <NavBar />
-      <FormSurvey/>
+   
      </>
     
     
