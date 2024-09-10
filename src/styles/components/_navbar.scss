@@ -22,7 +22,7 @@
 
 #navbar_header-main {
   display: none;
-  @include media(sm) {
+  @include media(xxl) {
     display: block;
   }
 }

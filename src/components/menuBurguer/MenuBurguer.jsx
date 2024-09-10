@@ -30,7 +30,6 @@ function MenuBurguer(props) {
             <GrClose />
           </button>
         </div>
-
         <div className="menuBurguer_box">
           <menu className="menuBurger_navbar">
             {itemLinks.map((item, index) => (
@@ -38,6 +37,7 @@ function MenuBurguer(props) {
                 <li
                   className="menuBurguer_navbar-link"
                   onClick={() => handleItemClick(index)}
+                  
                 >
                   {item.name}
                   <span className="menuBurguer_icon">{item.component}</span>

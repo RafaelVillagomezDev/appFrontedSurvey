@@ -38,7 +38,7 @@ const routes = createRoutesFromElements(
       <Route path="update" element={<Update />} />
     </Route>
   </>
-);
+); 
 
 // Crear el enrutador principal
 const router = createBrowserRouter(routes);

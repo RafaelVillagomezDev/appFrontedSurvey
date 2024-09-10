@@ -8,7 +8,7 @@ import surveyReducer from "../slices/survey/surveySlice"
 
 const store=configureStore({
   reducer:{
-    login:loginReducer,
+    user:loginReducer,
     survey:surveyReducer
   },
   

@@ -13,7 +13,7 @@
 }
 
 #home{
-    width: 300px;
+    width: 100%;
     min-width: 300px;
     margin: 0 auto; 
     background-color: $base_white;
@@ -29,10 +29,7 @@
          }
     }
 
-    @include media(sm) {    
-        width:80%;
-        
-     }
+   
 }
 
 .tabla{

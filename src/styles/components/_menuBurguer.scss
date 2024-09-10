@@ -4,19 +4,17 @@
   position: fixed;
   right: 0;
   z-index: 1;
-  width: 200px;
+  width: 60%;
   @include media(sm) {
-    width: 400px;
+    width: 60%;
     margin: 2rem;
     border-top-left-radius: 31px;
     border-top-right-radius: 31px;
     border: 1px solid black;
   }
-  @include media(md) {
-    width: 500px;
-  }
+ 
   @include media(lg) {
-    width: 400px;
+    width: 420px;
   }
 }
 
@@ -28,7 +26,7 @@
 }
 
 .menuBurguer_container {
-  padding: 1.5rem;
+  padding: 2rem;
 }
 
 .menuBurguer_btn-close {
@@ -45,6 +43,7 @@
 .menuBurger_navbar {
   display: flex;
   flex-direction: column;
+  padding: 0;
 }
 
 .menuBurguer_navbar-link {
@@ -58,10 +57,15 @@
     background-color: $base_text-blue;
   }
 
-  font-size: $base_size-title;
+  font-size: $base_size-sm;
   text-decoration: none;
   color: $base_text;
   font-family: $base_font-geo;
+
+  @include media(sm) {
+    font-size: $base_size-title;
+  }
+
 }
 
 .menuBurguer_icon {

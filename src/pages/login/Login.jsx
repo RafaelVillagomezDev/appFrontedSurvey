@@ -2,8 +2,6 @@ import React, { lazy, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authUser, login } from "../../slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
-import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
-import { isRol } from "../../utils/auth/ProtectedRoutes";
 import { toast } from "react-toastify";
 import PortadaLogin from "../../../public/assets/img/Portada_login.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
