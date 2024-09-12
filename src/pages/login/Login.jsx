@@ -2,9 +2,10 @@ import React, { lazy, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authUser, login } from "../../slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import PortadaLogin from "../../../public/assets/img/Portada_login.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import MySwal from "sweetalert2";
+import { isRejectedWithValue } from "@reduxjs/toolkit";
 
 const Footer = lazy(() => import("../../components/footer/Footer"));
 
@@ -26,29 +27,40 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const navigateRegister = () => {
+    navigate("/register");
+  };
 
-  const navigateRegister=()=>{
-     navigate("/register")
-  } 
-
-  const loginUser = (event) => {
+  const loginUser = async (event) => {
     event.preventDefault();
     const objLogin = { email: email, password: password };
-    dispatch(authUser(objLogin))
-      .then((data) => {
-        const errores = data.payload.errors;
-        if (errores) {
-          errores.forEach((elem) => {
-            toast.error("Error :" + elem.msg);
-          });
-        }
-      })
-      .then(() => {
-        navigate("/app");
-      })
-      .catch((err) => {
-        toast.err(err);
+
+    try {
+      const result = await dispatch(authUser(objLogin));
+
+      // Aquí verificamos si la acción fue rechazada con un valor usando isRejectedWithValue
+      if (isRejectedWithValue(result)) {
+        MySwal.fire({
+          icon: "error",
+          title: "Error",
+          text: result.payload || "An unknown error occurred!", // Muestra el mensaje de error
+          allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+          allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+          allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
+        });
+      }
+      navigate("/app")
+    } catch (error) {
+      // Cualquier otro error que no sea manejado por rejectWithValue
+      MySwal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message || "An unexpected error occurred!",
+        allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+        allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+        allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
       });
+    }
   };
 
   return (
@@ -62,7 +74,6 @@ function Login() {
               alt="Portada"
               height={80}
             />
-            
           </div>
           <div id="main_container_form">
             <h1>ClickSurvey</h1>
@@ -106,7 +117,10 @@ function Login() {
             <div id="main_container-register">
               <span>o</span>
               <p className="main_box-register">
-                 <span>¿No tienes una cuenta? <a onClick={navigateRegister}>Registrate</a></span> 
+                <span>
+                  ¿No tienes una cuenta?{" "}
+                  <a onClick={navigateRegister}>Registrate</a>
+                </span>
               </p>
             </div>
           </div>

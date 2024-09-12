@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit";
 import loginReducer from "../slices/login/loginSlice"
 import surveyReducer from "../slices/survey/surveySlice"
 
@@ -11,6 +11,10 @@ const store=configureStore({
     user:loginReducer,
     survey:surveyReducer
   },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false, // Desactiva la verificación de serializabilidad
+  }),
   
   
 })
