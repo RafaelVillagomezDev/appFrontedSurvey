@@ -1,107 +1,21 @@
-@import '../mixin';
-@import '../base/base';
+@import "../mixin";
+@import "../base/base";
 @import "../components/navbar";
 @import "../components/menuBurguer";
+@import "../components/cardSurvey";
 
-#survey-container{
-    display: block;
-    @include media(sm) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }  
+.home {
+  width: 100%;
+  height: 100vh;
 }
 
-#home{
-    width: 100%;
-    min-width: 300px;
-    margin: 0 auto; 
-    background-color: $base_white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    h1{
-        text-align: center;
-        color: black;
-        font-size: 20px;
-        padding: 12px;
-        @include media(sm) {    
-            font-size: 40px;
-            padding: 18px;
-         }
-    }
-
-   
+.home_container {
+  margin: 2rem;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  @include media(sm){
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
 }
-
-.tabla{
-    display: flex;
-    width: 100%;
-    overflow-x: auto;
-    margin: 2rem 0rem;
-    border-radius: 8px;
-    @include media(sm) {    
-        width: 85%;
-        margin: 3rem;
-        display: block;
-        
-     }
-}
-
-.tabla_fila {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    font-weight: 700;
-    .tabla_columna{
-        
-        background-color: green;
-    }
-    @include media(sm) {   
-        font-size: 12px; 
-        flex-direction: row;
-     }
-}
-
-.tabla_fila2 {
-    display: flex;
-    flex-direction: column;
-    .tabla_columna{
-        background-color: yellow;
-        color: black;
-        font-weight: 700;
-    }
-    @include media(sm) {    
-        flex-direction: row;
-        font-size: 12px; 
-     }
-}
-
-.tabla_columna {
-    flex: 1;
-    border: 1px solid #000;
-    padding: 10px;
-    text-align: center;
-    
-    
-}
-
-.btn_mobile-remove{
-    width: 100%;
-    padding: 12px;
-    background-color: red;
-    outline: none;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    span{
-        color: white;
-        font-size: 18px;
-    }
-
-    @include media(sm) {    
-       width: 200px;
-       padding:4px;
-       font-size: 16px;
-       height: 50px;
-     }
-}
-

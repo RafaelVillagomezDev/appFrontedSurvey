@@ -19,7 +19,6 @@ export const authUser = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       let data = await getAuthUser(obj);
-      data={...jwtDecode(data.token)}
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -38,8 +37,10 @@ export const loginSlice = createSlice({
       })
       .addCase(authUser.fulfilled, (state, action) => {
         state.status = "success";
-        state.user.push(action.payload); // Guardar el usuario directamente
-        saveLocalStorage("token",action.payload.id_user)
+        saveLocalStorage("token",action.payload.token)
+        const decodeToken={...jwtDecode(action.payload.token)}
+        state.user.push(decodeToken); // Guardar el usuario directamente
+      
       })
       .addCase(authUser.rejected, (state, action) => {
         state.status = "failed";
