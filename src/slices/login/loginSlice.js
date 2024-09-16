@@ -4,14 +4,16 @@ import {
   isRejectedWithValue,
 } from "@reduxjs/toolkit";
 import { getAuthUser } from "../../services/auth/loginUser";
-import { saveLocalStorage } from "../../utils/storage/saveLocalStorage";
+import { getLocalStorage, saveLocalStorage } from "../../utils/storage/saveLocalStorage";
 import jwtDecode from "jwt-decode";
 
 
 const initialState = {
   user: [], // Cambiado a null si solo hay un usuario
+  token:getLocalStorage("token")|| null,
   status: "idle", // Estado para manejar el estado de la solicitud
   error:null,
+  isAuthenticated:!!getLocalStorage("token")
 };
 
 export const authUser = createAsyncThunk(
@@ -29,7 +31,13 @@ export const authUser = createAsyncThunk(
 export const loginSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.token = null;
+      state.isAuthenticated = false;
+      localStorage.removeItem("token")
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(authUser.pending, (state) => {
@@ -37,9 +45,11 @@ export const loginSlice = createSlice({
       })
       .addCase(authUser.fulfilled, (state, action) => {
         state.status = "success";
-        saveLocalStorage("token",action.payload.token)
         const decodeToken={...jwtDecode(action.payload.token)}
         state.user.push(decodeToken); // Guardar el usuario directamente
+        state.token=action.payload.token
+        state.isAuthenticated = true;
+        saveLocalStorage("token",action.payload.token)
       
       })
       .addCase(authUser.rejected, (state, action) => {
@@ -48,5 +58,7 @@ export const loginSlice = createSlice({
       });
   },
 });
+
+export const { logout } = loginSlice.actions;
 
 export default loginSlice.reducer;

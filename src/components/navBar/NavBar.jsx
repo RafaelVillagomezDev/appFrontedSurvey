@@ -4,13 +4,8 @@ import { FaAlignJustify } from "react-icons/fa6";
 import MenuBurguer from "../menuBurguer/MenuBurguer";
 
 function NavBar() {
-  const navigate = useNavigate();
+ 
   const [isOpen, setIsOpen] = useState(false);
-  const salir = (event) => {
-    event.preventDefault();
-    localStorage.clear();
-    navigate("/");
-  };
 
   const handleClose = () => {
     setIsOpen(!isOpen);

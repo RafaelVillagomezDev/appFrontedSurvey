@@ -3,14 +3,13 @@ import { GrClose } from "react-icons/gr";
 import { NavLink, useNavigate } from "react-router-dom";
 import { itemLinks } from "./menuList/menuList";
 import { ImExit } from "react-icons/im";
+import { useDispatch } from "react-redux";
+import { logout } from "../../slices/login/loginSlice";
 
 function MenuBurguer(props) {
-  const navigate = useNavigate();
-
-  const salir = (event) => {
-    event.preventDefault();
-    localStorage.clear();
-    navigate("/");
+  const dispatch = useDispatch()
+  const salir = () => {
+    dispatch(logout())
   };
 
   const [openItemIndex, setOpenItemIndex] = useState(null);
