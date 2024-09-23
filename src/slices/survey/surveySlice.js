@@ -5,12 +5,11 @@ import {
   removeItemSurvey,
 } from "../../services/survey/surveyObj";
 
-
 const initialState = {
   survey: [],
-  status:'idle',
-  searchWord:''
-
+  status: "idle",
+  searchWord: "",
+  optionSelect: "",
 };
 
 export const getSurvey = createAsyncThunk(
@@ -29,11 +28,9 @@ export const createSurvey = createAsyncThunk(
   }
 );
 
-
 export const deleteSurvey = createAsyncThunk(
   "surveySlice/deleteSurvey",
   async (obj) => {
-    
     const data = await removeItemSurvey(obj);
 
     return data;
@@ -46,10 +43,12 @@ export const surveySlice = createSlice({
   reducers: {
     setSearchWord(state, action) {
       state.searchWord = action.payload;
-    }
+    },
+    setHandleOption(state, action) {
+      state.optionSelect = action.payload;
+    },
   },
   extraReducers: (builder) => {
-
     //Obtener encuestas
     builder.addCase(getSurvey.pending, (state) => {
       state.status = "loading";
@@ -58,7 +57,6 @@ export const surveySlice = createSlice({
       state.status = "success";
 
       state.survey = action.payload.data;
-     
     });
     builder.addCase(getSurvey.rejected, (state) => {
       state.status = "failed";
@@ -70,15 +68,16 @@ export const surveySlice = createSlice({
     });
     builder.addCase(deleteSurvey.fulfilled, (state, action) => {
       state.status = "success";
-      const pos = state.survey.findIndex((elem) => elem.id_encuesta === action.payload.id)
-      state.survey.splice(pos, 1)
-   
+      const pos = state.survey.findIndex(
+        (elem) => elem.id_encuesta === action.payload.id
+      );
+      state.survey.splice(pos, 1);
     });
     builder.addCase(deleteSurvey.rejected, (state) => {
       state.status = "failed";
     });
 
-     //Crear encuestas
+    //Crear encuestas
     builder.addCase(createSurvey.pending, (state) => {
       state.status = "loading";
     });
@@ -88,22 +87,23 @@ export const surveySlice = createSlice({
     builder.addCase(createSurvey.rejected, (state) => {
       state.status = "failed";
     });
-    
   },
 });
 
+export const { survey, setSearchWord, setHandleOption } = surveySlice.actions;
 
-export const {survey,setSearchWord} = surveySlice.actions;
+export const selectFilterSurvey = (state) => {
+  const { survey, searchWord, optionSelect } = state.survey;
 
-export const selectFilterSurvey=(state)=>{
-    
-    const { survey,searchWord } = state.survey;
-    
-
-    return survey.filter((surveys) =>
-    searchWord ? surveys.Encuesta_ID===searchWord : true
+  // Filtramos las encuestas primero por la propiedad
+  const filteredSurveys = survey.filter((surveys) =>
+    surveys.hasOwnProperty(optionSelect)
   );
-}
+
+  // Luego filtramos por el valor de la propiedad con el searchWord
+  return filteredSurveys.filter((surveys) =>
+    searchWord ? surveys[optionSelect].includes(searchWord) : true
+  );
+};
 
 export default surveySlice.reducer;
- 

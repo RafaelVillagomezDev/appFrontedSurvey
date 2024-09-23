@@ -1,3 +1,9 @@
+#navlogin_container{
+   display: flex;
+   flex-direction: row;
+   column-gap: 1rem;
+}
+
 #Buscador {
   background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png)
     no-repeat 15px 5px;
@@ -23,6 +29,7 @@ input[type="search"]::-webkit-search-cancel-button {
   background-size: contain;
   opacity: 0;
   pointer-events: none;
+  cursor: pointer;
 }
 
 input[type="search"]:focus::-webkit-search-cancel-button {
@@ -30,3 +37,8 @@ input[type="search"]:focus::-webkit-search-cancel-button {
   pointer-events: all;
 }
 
+#selectSearch{
+  border-radius: 20px;
+  padding: 0.5rem;
+  
+}

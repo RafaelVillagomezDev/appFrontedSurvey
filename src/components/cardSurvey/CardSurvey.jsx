@@ -1,11 +1,17 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
+
 
 function CardSurvey(props) {
+
+
+
   return (
     <>
-      
       {props.survey.map((survey, key) => (
         <div className="cardSurvey" key={key}>
+          <div className="cardSurvey_container cardSurvey_align">
+            <p><span>Encuesta_ID:</span> {survey.Encuesta_ID} <button className="cardSurvey_btn-copy" ></button></p>
+          </div>
           <div className="cardSurvey_container">
             <h2>Descripción</h2>
             <p>{survey.Encuesta_Descripcion}</p>

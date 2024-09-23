@@ -1,18 +1,40 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchWord } from "../../slices/survey/surveySlice";
+import { setHandleOption, setSearchWord } from "../../slices/survey/surveySlice";
 
 function SearchBar() {
-    
-    const dispatch = useDispatch()
-    const searchWord = useSelector((state) => state.survey.searchTerm);
-    const handleSearchWord=()=>{
-         dispatch(setSearchWord(event.target.value))
-    }
+  const dispatch = useDispatch();
+  const searchWord = useSelector((state) => state.survey.searchTerm);
+  const optionSelected=useSelector((state) => state.survey.optionSelect);
+
+  const handleSearchWord = () => {
+    dispatch(setSearchWord(event.target.value));
+  };
+
+  
+  const handleOption = () => {
+    dispatch(setHandleOption(event.target.value));
+  };
+
 
   return (
     <div id="navlogin_container">
-      <input type="search" value={searchWord} onChange={handleSearchWord} placeholder="Busca una encuesta" id="Buscador" />
+      <input
+        type="search"
+        value={searchWord}
+        onChange={handleSearchWord}
+        placeholder="Busca una encuesta"
+        id="Buscador"
+      />
+      <select id="selectSearch" name="selectSearch" value={optionSelected} onChange={handleOption}>
+        <option  value="" disabled selected>
+          Elige una opción
+        </option>
+        <option value="Productos_Categoria">Categoría</option>
+        <option value="Encuesta_ID" >
+          Id Encuesta
+        </option>
+      </select>
     </div>
   );
 }

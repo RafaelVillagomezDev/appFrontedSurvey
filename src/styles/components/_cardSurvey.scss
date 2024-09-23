@@ -2,7 +2,7 @@
   display: flex;
   background-color: $base_white;
   width: 100%;
-  height: 400px;
+  height: 450px;
   border: 1px solid black;
   border-radius: 12px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -10,7 +10,7 @@
 }
 
 .cardSurvey_container {
-  padding: 1.5rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
@@ -28,8 +28,16 @@
     white-space: wrap;
     line-height: 20px;
   }
+  span{
+    font-weight:bold;
+  }
 }
 
+.cardSurvey_align{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .containerProduct_box{
   display:inline-flex;
@@ -57,4 +65,10 @@
    color: $base_azure;
    font-size: $base_size-sm;
    border: none;
+}
+
+.cardSurvey_btn-copy{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
