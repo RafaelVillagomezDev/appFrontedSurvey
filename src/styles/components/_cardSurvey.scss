@@ -10,14 +10,14 @@
 }
 
 .cardSurvey_container {
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
   flex-direction: column;
   column-gap: 0.2rem;
   font-family: $base_font-geo;
-  
+  height:-webkit-fill-available;
   h2 {
     font-size: $base;
     font-weight: bold;

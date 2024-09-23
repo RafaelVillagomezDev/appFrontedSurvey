@@ -8,7 +8,9 @@ import {
 
 const initialState = {
   survey: [],
-  status:'idle'
+  status:'idle',
+  searchWord:''
+
 };
 
 export const getSurvey = createAsyncThunk(
@@ -41,7 +43,11 @@ export const deleteSurvey = createAsyncThunk(
 export const surveySlice = createSlice({
   name: "survey",
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchWord(state, action) {
+      state.searchWord = action.payload;
+    }
+  },
   extraReducers: (builder) => {
 
     //Obtener encuestas
@@ -85,6 +91,19 @@ export const surveySlice = createSlice({
     
   },
 });
-export const {survey} = surveySlice.actions;
+
+
+export const {survey,setSearchWord} = surveySlice.actions;
+
+export const selectFilterSurvey=(state)=>{
+    
+    const { survey,searchWord } = state.survey;
+    
+
+    return survey.filter((surveys) =>
+    searchWord ? surveys.Encuesta_ID===searchWord : true
+  );
+}
 
 export default surveySlice.reducer;
+ 

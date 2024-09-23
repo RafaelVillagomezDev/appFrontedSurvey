@@ -40,25 +40,3 @@
   font-size: $base_size-md;
 }
 
-.navbar_ul {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  gap: 2rem;
-}
-
-.navbar_li {
-  padding: 0.75rem;
-  border-radius: 50px;
-  font-size: $base_size;
-  list-style-type: none;
-  &:hover {
-    background-color: $base_text-blue;
-  }
-  a {
-    font-size: $base_size-title;
-    text-decoration: none;
-    color: $base_text;
-    font-family: $base_font-geo;
-  }
-}

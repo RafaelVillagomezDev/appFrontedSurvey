@@ -1,0 +1,32 @@
+#Buscador {
+  background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png)
+    no-repeat 15px 5px;
+  background-size: 24px;
+  width: 500px;
+  border: transparent;
+  padding: 10px 30px 10px 40px;
+  outline: none;
+  font-family: $base_font-geo;
+  font-size: $base_size;
+  border: solid 1px $base_text;
+  border-radius: 120px;
+  color: $base_text;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  border-radius: 50em;
+  background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+    no-repeat 50% 50%;
+  background-size: contain;
+  opacity: 0;
+  pointer-events: none;
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+  opacity: 0.3;
+  pointer-events: all;
+}
+
