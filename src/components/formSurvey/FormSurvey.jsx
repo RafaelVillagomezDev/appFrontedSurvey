@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSurvey } from "../../slices/survey/surveySlice";
 import { toast } from "react-toastify";
@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 
 function FormSurvey() {
   const dispath= useDispatch()
+
+
 
   const crearEncuesta=(e)=>{
     e.preventDefault()

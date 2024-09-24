@@ -9,21 +9,13 @@ function Footer() {
     <div id="container_footer">
       
         <div className="box_footer-title">
-          <a href="https://yandrydev.es/home" target="_blank">YandryDev</a>
+          <h3>ClickSurvey</h3>
         </div>
         <div className="box_footer">
-          <ul className="list_footer">
-            <li>
-              <a href="">Inicio</a>
-            </li>
-            <li>
-              <a href="">FAQs</a>
-            </li>
-            <li>
-              <a href="">Register</a>
-            </li>
-          </ul>
+          <p>&#9400;ClickSurvey  es una marca registrada propiedad de &#9400;yandrydev.es</p>
         </div>
+        
+        
         <div id="box_footer-line">
           <ul className="list_footer-social">
             <li>

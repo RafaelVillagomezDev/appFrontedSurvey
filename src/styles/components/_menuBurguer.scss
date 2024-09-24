@@ -7,9 +7,6 @@
   width: 60%;
   @include media(sm) {
     width: 60%;
-    margin: 2rem;
-    border-top-left-radius: 31px;
-    border-top-right-radius: 31px;
     border: 1px solid black;
   }
  

@@ -23,7 +23,7 @@ function SearchBar() {
         type="search"
         value={searchWord}
         onChange={handleSearchWord}
-        placeholder="Busca una encuesta"
+        placeholder="Buscar"
         id="Buscador"
       />
       <select id="selectSearch" name="selectSearch" value={optionSelected} onChange={handleOption}>

@@ -6,6 +6,7 @@ import PortadaLogin from "../../../public/assets/img/Portada_login.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import MySwal from "sweetalert2";
 import { isRejectedWithValue } from "@reduxjs/toolkit";
+import DOMPurify from "dompurify";
 
 const Footer = lazy(() => import("../../components/footer/Footer"));
 
@@ -23,20 +24,72 @@ import("../../styles/pages/_login.scss").then(() => {
 
 function Login() {
   const dispatch = useDispatch();
-  const [email, setImail] = useState("");
-  const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const navigateRegister = () => {
     navigate("/register");
   };
 
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const regexPatterns = [
+    {
+      field: "email",
+      regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Formato estándar de correo electrónico
+      msg: "El formato del correo electrónico es inválido.",
+    },
+    {
+      field: "password",
+      regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@*?#$%^&+=!]).{8,20}$/,
+      msg: "La contraseña es inválida.",
+    },
+  ];
+
+  const validateField = (name, value) => {
+    const pattern = regexPatterns.find((rule) => rule.field === name);
+
+    if (pattern && value.length > 0) {
+      if (pattern.regex_plus) {
+        return pattern.regex.test(value) || pattern.regex_plus.test(value)
+          ? ""
+          : pattern.msg;
+      } else {
+        return pattern.regex.test(value) ? "" : pattern.msg;
+      }
+    }
+    return "";
+  };
+
+  // Función para manejar cambios en los campos del formulario
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+
+    // Validar el campo actual
+    const errorMsg = validateField(name, DOMPurify.sanitize(value));
+
+    // Actualizar los errores
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: errorMsg,
+    }));
+
+    setFormData((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
   const loginUser = async (event) => {
     event.preventDefault();
-    const objLogin = { email: email, password: password };
 
     try {
-      const result = await dispatch(authUser(objLogin));
+      const result = await dispatch(authUser(formData));
 
       // Aquí verificamos si la acción fue rechazada con un valor usando isRejectedWithValue
       if (isRejectedWithValue(result)) {
@@ -49,7 +102,7 @@ function Login() {
           allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
         });
       }
-      navigate("/app")
+      navigate("/app");
     } catch (error) {
       // Cualquier otro error que no sea manejado por rejectWithValue
       MySwal.fire({
@@ -87,11 +140,16 @@ function Login() {
                     maxLength={50}
                     name="email"
                     autoComplete="username"
-                    onChange={(e) => setImail(e.target.value)}
+                    defaultValue={formData.email}
+                    onBlur={handleBlur}
                     placeholder="Email"
                     required
                   />
                 </div>
+                <div className="error_container">
+                  {errors.email && <p className="error_text">{errors.email}</p>}
+                </div>
+
                 <div className="form_div-group">
                   <label htmlFor="password">Password</label>
                   <input
@@ -100,11 +158,18 @@ function Login() {
                     maxLength={50}
                     name="password"
                     autoComplete="current-password"
-                    onChange={(e) => setPassword(e.target.value)}
+                    defaultValue={formData.password}
+                    onBlur={handleBlur}
                     placeholder="Password"
                     required
                   />
                 </div>
+                <div className="error_container">
+                  {errors.password && (
+                    <p className="error_text">{errors.password}</p>
+                  )}
+                </div>
+
                 <button
                   className="form_btn-submit"
                   type="submit"

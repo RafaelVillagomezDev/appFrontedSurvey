@@ -109,6 +109,7 @@
   gap: 1rem;
   font-size: 18px;
   font-family: $base_font-geo;
+  padding-top: 1rem;
   label {
     color: $base_text;
     font-size: 18px;
@@ -128,7 +129,15 @@
 }
 
 
-.error_text{
-  padding: 1rem;
-  color: $base_error;
+.error_container {
+  position: relative;
+  min-height: 1.5rem; /* Espacio reservado */
+}
+
+.error_text {
+  word-wrap: break-word; /* Permite que las palabras largas se dividan */
+  word-break: break-word; /* Otra opción para dividir palabras largas */
+  color: red;
+  position: absolute;
+  font-size: $base_size;
 }

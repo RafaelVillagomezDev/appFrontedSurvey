@@ -101,7 +101,6 @@ function FormRegister() {
         title: "Se ha creado con exito su cuenta , vuelva a iniciar sesion",
         text: response.messague,
       });
-
     } catch (error) {
       MySwal.fire({
         icon: "error",
@@ -142,6 +141,8 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+            </div>
+            <div className="error_container">
               {errors.name_user && (
                 <p className="error_text">{errors.name_user}</p>
               )}
@@ -159,6 +160,8 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+            </div>
+            <div className="error_container">
               {errors.surname && <p className="error_text">{errors.surname}</p>}
             </div>
             <div className="form_div-group">
@@ -174,6 +177,8 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+            </div>
+            <div className="error_container">
               {errors.dni && <p className="error_text">{errors.dni}</p>}
             </div>
             <div className="form_div-group">
@@ -189,6 +194,8 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+            </div>
+            <div className="error_container">
               {errors.email && <p className="error_text">{errors.email}</p>}
             </div>
             <div className="form_div-group">
@@ -204,6 +211,8 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+            </div>
+            <div className="error_container">
               {errors.birthday && (
                 <p className="error_text">{errors.birthday}</p>
               )}
@@ -221,6 +230,8 @@ function FormRegister() {
                 onChange={handleChange}
                 required
               />
+            </div>
+            <div className="error_container">
               {errors.password && (
                 <p className="error_text">{errors.password}</p>
               )}
