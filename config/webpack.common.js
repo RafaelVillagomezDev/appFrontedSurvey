@@ -13,23 +13,21 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "../dist"),
-    filename: "main.bundle-[hash].js",
-    clean: true,
-    publicPath: "/", // Esto asegura que los archivos estáticos se sirvan desde la raíz
-    clean: true,
+    filename: "main.bundle-[contenthash].js",
+    publicPath: "/",
   },
 
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".html", ".css", ".scss"],
     alias: {
-      styles: path.resolve(__dirname, "../src/styles/"),
+      styles: path.resolve(__dirname, "../src/styles"),
     },
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "../src", "index.html"),
-      filename: "index.html",
+      filename: path.join(__dirname, "../dist", "index.html"), // Ruta absoluta
       hash: true,
     }),
     new MiniCssExtractPlugin({

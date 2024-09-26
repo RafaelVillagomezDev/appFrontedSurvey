@@ -1,16 +1,19 @@
-const common = require("./webpack.common");
 const path = require("path");
 const { merge } = require("webpack-merge");
+const common = require("./webpack.common");
+
 const prodConfig = {
   mode: "production",
   devtool: "source-map",
   entry: {
-    main: "./src/index.js",
+    main: path.resolve(__dirname, "../src/index.js"), // Ruta corregida al archivo index.js
   },
   output: {
-    filename: "[name].[contenthash].js",
+    filename: "[name].[contenthash].js", 
     chunkFilename: "[name].[contenthash].chunk.js", // Nombre único para fragmentos
-    path: path.resolve(__dirname, "../dist"),
+    path: path.resolve(__dirname, "../dist"), // Asegúrate de que los archivos salgan a la carpeta dist
+    clean: true, // Limpia la carpeta dist antes de generar nuevos archivos
+    publicPath: "/", // Define la ruta pública de tu aplicación
   },
   optimization: {
     splitChunks: {
@@ -31,7 +34,7 @@ const prodConfig = {
           minSize: 0,
         },
         vendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom)[\\/]/, // Busca en los módulos de node
+          test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom)[\\/]/, // React y sus dependencias
           name: "vendor",
           chunks: "all",
           priority: 10,
@@ -47,8 +50,7 @@ const prodConfig = {
           priority: -20,
           reuseExistingChunk: true,
         },
-        // estamos optando por no participar en defaultVendors, por lo que el resto de los módulos del nodo formarán parte del default cacheGroup
-        defaultVendors: false,
+        defaultVendors: false, // Deshabilitar defaultVendors para que el resto de los módulos estén en "default"
       },
     },
   },

@@ -1,7 +1,9 @@
-@import "../components/formSurvey";
-@import "../components/navlogin";
 @import "../mixin";
 @import "../base/base";
+@import "../components/formSurvey";
+@import "../components/footer";
+@import "../components/navlogin";
+
 
 #wrapper {
   display: flex;

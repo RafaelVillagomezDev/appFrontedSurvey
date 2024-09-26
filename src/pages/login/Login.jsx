@@ -16,7 +16,7 @@ import("styles/_index.scss").then(() => {
   console.log("Reset styles loaded");
 });
 
-import("styles/pages/_login.scss").then(() => {
+import("../../styles/pages/_login.scss").then(() => {
   console.log("Home styles loaded");
 });
 
