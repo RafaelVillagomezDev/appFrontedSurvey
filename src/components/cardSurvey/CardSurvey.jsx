@@ -1,4 +1,5 @@
 import React, { memo, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 function CardSurvey(props) {
@@ -34,9 +35,7 @@ function CardSurvey(props) {
           </div>
 
           <div className="cardSurvey_container">
-            <button className="cardSurvey_btn-complete">
-              Completar encuesta
-            </button>
+            <Link to={`/survey/${survey.Encuesta_ID}`} className="cardSurvey_btn-complete">Completar encuesta</Link>
           </div>
         </div>
       ))}

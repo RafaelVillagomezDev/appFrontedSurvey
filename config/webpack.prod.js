@@ -16,7 +16,7 @@ const prodConfig = {
     splitChunks: {
       minSize: 17000,
       minRemainingSize: 0,
-      minChunks: 1,
+      minChunks: 4,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
       automaticNameDelimiter: "_",
@@ -36,8 +36,14 @@ const prodConfig = {
           chunks: "all",
           priority: 10,
         },
+        styles: {
+          name: 'styles', 
+          test: /\.css$/, 
+          chunks: 'all',
+          enforce: true, 
+        },
         default: {
-          minChunks: 2,
+          minChunks: 4,
           priority: -20,
           reuseExistingChunk: true,
         },

@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../slices/login/loginSlice";
 
 function MenuBurguer(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const salir = () => {
-    dispatch(logout())
+    dispatch(logout());
   };
 
   const [openItemIndex, setOpenItemIndex] = useState(null);
@@ -32,11 +32,10 @@ function MenuBurguer(props) {
         <div className="menuBurguer_box">
           <menu className="menuBurger_navbar">
             {itemLinks.map((item, index) => (
-              <>
+              <div key={index}>
                 <li
                   className="menuBurguer_navbar-link"
                   onClick={() => handleItemClick(index)}
-                  
                 >
                   {item.name}
                   <span className="menuBurguer_icon">{item.component}</span>
@@ -59,7 +58,7 @@ function MenuBurguer(props) {
                     </menu>
                   )}
                 </menu>
-              </>
+              </div>
             ))}
             <li className="menuBurguer_navbar-link" onClick={salir}>
               Cerrar sesion

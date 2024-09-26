@@ -12,9 +12,10 @@ const devConfig = {
       webSocketURL: "auto://0.0.0.0:0/ws",
     },
     static: {
-      directory: path.join(__dirname, "./dist"),
+      directory: path.join(__dirname, "dist"),
       
     },
+
     host: "0.0.0.0",
     compress: true,
     port: 3002,

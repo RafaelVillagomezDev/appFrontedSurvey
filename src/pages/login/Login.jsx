@@ -10,15 +10,13 @@ import DOMPurify from "dompurify";
 
 const Footer = lazy(() => import("../../components/footer/Footer"));
 
-const NavBarLogin = lazy(() =>
-  import("../../components/navBarLogin/NavBarLogin")
-);
+
 // Carga dinámica del CSS
-import("../../styles/_index.scss").then(() => {
+import("styles/_index.scss").then(() => {
   console.log("Reset styles loaded");
 });
 
-import("../../styles/pages/_login.scss").then(() => {
+import("styles/pages/_login.scss").then(() => {
   console.log("Home styles loaded");
 });
 

@@ -23,7 +23,10 @@ const Login = lazy(() => import("./pages/login/Login"));
 const Home = lazy(() => import("./pages/home/Home"));
 const CreateSurvey = lazy(() => import("./pages/create/CreateSurvey"));
 const Update = lazy(() => import("./pages/update/Update"));
+const Survey = lazy(() => import("./pages/survey/Survey"));
 const Error = lazy(() => import("./pages/error/Error"));
+
+
 
 // Definir las rutas utilizando createRoutesFromElements
 const routes = createRoutesFromElements(
@@ -36,6 +39,7 @@ const routes = createRoutesFromElements(
       <Route path="app" element={<Home />} />
       <Route path="create" element={<CreateSurvey />} />
       <Route path="update" element={<Update />} />
+      <Route path="survey/:id_encuesta" element={<Survey/>} />
     </Route>
   </>
 ); 

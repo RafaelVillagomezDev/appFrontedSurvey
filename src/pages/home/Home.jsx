@@ -1,6 +1,6 @@
 import React, { lazy, startTransition, useEffect } from "react";
 
-import("../../styles/pages/_home.scss").then(() => {
+import("styles/pages/_home.scss").then(() => {
   console.log("Home styles loaded");
 });
 
