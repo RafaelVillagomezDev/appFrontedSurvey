@@ -2,11 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addSurvey,
   getListSurvey,
+  getSurveyUnique,
   removeItemSurvey,
 } from "../../services/survey/surveyObj";
 
 const initialState = {
   survey: [],
+  uniqueSurvey:[],
   status: "idle",
   searchWord: "",
   optionSelect: "",
@@ -16,6 +18,15 @@ export const getSurvey = createAsyncThunk(
   "surveySlice/fetchSurvey",
   async (token) => {
     const data = await getListSurvey(token);
+    return data;
+  }
+);
+
+export const getUniqueSurvey = createAsyncThunk(
+  "surveySlice/fetchUniqueSurvey",
+  async (dataObj) => {
+    const {token,id_encuesta}=dataObj
+    const data = await getSurveyUnique(token,id_encuesta);
     return data;
   }
 );
@@ -62,6 +73,19 @@ export const surveySlice = createSlice({
       state.status = "failed";
     });
 
+    //Obtener encuesta unica 
+    builder.addCase(getUniqueSurvey.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(getUniqueSurvey.fulfilled, (state, action) => {
+      state.status = "success";
+
+      state.uniqueSurvey = action.payload.data[0];
+    });
+    builder.addCase(getUniqueSurvey.rejected, (state) => {
+      state.status = "failed";
+    });
+
     //Eliminar encuestas
     builder.addCase(deleteSurvey.pending, (state) => {
       state.status = "loading";
@@ -95,7 +119,12 @@ export const { survey, setSearchWord, setHandleOption } = surveySlice.actions;
 export const selectFilterSurvey = (state) => {
   const { survey, searchWord, optionSelect } = state.survey;
 
-  // Filtramos las encuestas primero por la propiedad
+  // Si no hay opción seleccionada, devuelve el estado completo
+  if (!optionSelect) {
+    return survey;
+  }
+
+  // Filtramos las encuestas primero por la propiedad seleccionada
   const filteredSurveys = survey.filter((surveys) =>
     surveys.hasOwnProperty(optionSelect)
   );
@@ -105,5 +134,6 @@ export const selectFilterSurvey = (state) => {
     searchWord ? surveys[optionSelect].includes(searchWord) : true
   );
 };
+
 
 export default surveySlice.reducer;

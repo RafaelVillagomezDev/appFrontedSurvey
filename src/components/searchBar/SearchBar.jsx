@@ -26,8 +26,8 @@ function SearchBar() {
         placeholder="Buscar"
         id="Buscador"
       />
-      <select id="selectSearch" name="selectSearch" value={optionSelected} onChange={handleOption}>
-        <option  value="" disabled selected>
+      <select id="selectSearch" name="selectSearch" defaultValue={optionSelected} onChange={handleOption}>
+        <option  value="" disabled >
           Elige una opción
         </option>
         <option value="Productos_Categoria">Categoría</option>

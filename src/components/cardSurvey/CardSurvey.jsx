@@ -19,15 +19,15 @@ function CardSurvey(props) {
           </div>
           <div className="cardSurvey_container">
             <h2>Categoria</h2>
-            {survey.Productos_Categoria.split(",").map((categoria) => (
-              <p>{categoria}</p>
+            {survey.Productos_Categoria.split(",").map((categoria,key) => (
+              <p key={key}>{categoria}</p>
             ))}
           </div>
           <div className="cardSurvey_container">
             <h2>Productos</h2>
             <div className="containerProduct_box">
-              {survey.Productos_Nombre.split(",").map((producto) => (
-                <button className="containerProduct_btn-product">
+              {survey.Productos_Nombre.split(",").map((producto,key) => (
+                <button key={key} className="containerProduct_btn-product">
                   {producto}
                 </button>
               ))}

@@ -1,4 +1,4 @@
-import React, { lazy, startTransition, useEffect } from "react";
+import React, { lazy, startTransition, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSurvey, selectFilterSurvey } from "../../slices/survey/surveySlice";
 import { getLocalStorage } from "../../utils/storage/saveLocalStorage";
@@ -10,7 +10,6 @@ function ListSurvey() {
 
   const token = getLocalStorage("token");
 
-  const { survey } = useSelector((state) => state.survey);
 
   useEffect(() => {
     startTransition(() => {
@@ -18,9 +17,11 @@ function ListSurvey() {
     });
   }, [dispatch]);
 
-  const filterSurvey=useSelector(selectFilterSurvey)
+  const filterSurvey=useSelector((state) => selectFilterSurvey(state))
 
-  const dataSurvey=filterSurvey.length>0?filterSurvey:survey
+  
+
+  const dataSurvey= useMemo(() => filterSurvey, [filterSurvey]);
 
   return (
     <div className="home">
