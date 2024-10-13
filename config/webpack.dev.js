@@ -6,6 +6,8 @@ const devConfig = {
   devServer: {
     headers: {
       "Access-Control-Allow-Origin": "*",
+        'Cache-Control': 'no-store',
+      
     },
   
     client: {
@@ -19,6 +21,7 @@ const devConfig = {
     compress: true,
     port: 3002,
     hot: true,
+    
     historyApiFallback: true,
   },
   devtool: "eval-source-map",

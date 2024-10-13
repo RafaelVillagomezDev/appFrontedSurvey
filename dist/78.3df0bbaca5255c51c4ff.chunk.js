@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkappfronted=self.webpackChunkappfronted||[]).push([[78],{6078:(e,t,n)=>{n.r(t),n.d(t,{default:()=>l});var a=n(7294);const l=function(){return a.createElement(a.Fragment,null,a.createElement(NavBar,null),a.createElement("div",{id:"home"},a.createElement("h1",null,"SOY UPDATE")))}}}]);
-//# sourceMappingURL=78.3df0bbaca5255c51c4ff.chunk.js.map

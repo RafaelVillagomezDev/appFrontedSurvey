@@ -17,7 +17,7 @@ import("styles/_index.scss").then(() => {
 });
 
 import("../../styles/pages/_login.scss").then(() => {
-  console.log("Home styles loaded");
+  console.log("Login styles loaded");
 });
 
 function Login() {
@@ -128,9 +128,9 @@ function Login() {
           </div>
           <div id="main_container_form">
             <h1>ClickSurvey</h1>
-            <form id="form">
-              <div className="form_div">
-                <div className="form_div-group">
+            <form id="form_login">
+              <div className="form_login">
+                <div className="form_login-group">
                   <label htmlFor="email">Email</label>
                   <input
                     id="email"
@@ -148,7 +148,7 @@ function Login() {
                   {errors.email && <p className="error_text">{errors.email}</p>}
                 </div>
 
-                <div className="form_div-group">
+                <div className="form_login-group">
                   <label htmlFor="password">Password</label>
                   <input
                     id="password"
@@ -169,7 +169,7 @@ function Login() {
                 </div>
 
                 <button
-                  className="form_btn-submit"
+                  className="form_login-submit"
                   type="submit"
                   onClick={loginUser}
                 >

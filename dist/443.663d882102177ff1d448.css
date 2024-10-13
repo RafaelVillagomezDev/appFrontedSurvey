@@ -1,3 +1,0 @@
-#container_main{display:flex;flex-direction:column;gap:2rem;width:fit-content}@media(min-width: 768px){#container_main{flex-direction:row;height:100vh}}#box_img{flex:1}#box_img img{width:100%;height:100%}@media(min-width: 768px){#box_img img{width:100%;height:100%}}#box_content{flex:1;display:flex;flex-direction:column;gap:2rem;justify-content:center;align-items:center;font-size:45px}#box_content button{padding:1rem;background-color:#1eb592;font-size:20px;border:none;border-radius:15px;cursor:pointer}#box_content h1{font-size:40px}@media(min-width: 768px){#box_content h1{font-size:100px}}
-
-/*# sourceMappingURL=443.663d882102177ff1d448.css.map*/

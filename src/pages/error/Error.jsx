@@ -23,8 +23,8 @@ function Error() {
              <LazyLoadImage src={ErrorMonsterImg} id="monster_img" alt="imagen error" />
         </div>
         <div id="box_content">
-            <h1>Page not found</h1>
-            <button onClick={navigateHome}>Back Home</button>
+            <h1>Página no encontrada</h1>
+            <button onClick={navigateHome}>Home</button>
         </div>
         
       </div>

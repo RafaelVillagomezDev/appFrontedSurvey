@@ -6,7 +6,7 @@ const FormRegister = lazy(() =>
 const Footer = lazy(() => import("../../components/footer/Footer"));
 
 import("styles/pages/_register.scss").then(() => {
-  console.log("Reset styles loaded");
+  console.log("Register styles loaded");
 });
 
 function Register() {

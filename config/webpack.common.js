@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const envPath = path.resolve(__dirname, ".env");
 
@@ -15,6 +16,7 @@ module.exports = {
     path: path.join(__dirname, "../dist"),
     filename: "main.bundle-[contenthash].js",
     publicPath: "/",
+    clean: true,
   },
 
   resolve: {
@@ -34,6 +36,8 @@ module.exports = {
       filename: "[name].[contenthash].css", // Genera un archivo CSS por entrada
       chunkFilename: "[id].[contenthash].css", // Nombre para fragmentos CSS
     }),
+
+    new CleanWebpackPlugin(),
   ],
 
   // LOADERS
