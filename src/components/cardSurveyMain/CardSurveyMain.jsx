@@ -32,6 +32,23 @@ function CardSurveyMain() {
           <div className='cardSurveyMain_container'>
               <div className='cardSurveyMain_container-col'>
                 <div className='cardSurveyMain_container-row'>
+                  <h1>Descripción</h1>
+                  <p>{uniqueSurvey.Encuesta_Descripcion}</p>
+               
+                </div>
+                <div className='cardSurveyMain_container-row'>
+                  <h1>Productos</h1>
+                  <p>{uniqueSurvey.Productos_Nombre}</p>
+               
+                </div>
+                <div className='cardSurveyMain_container-row'>
+                  <h1>Subproductos</h1>
+                  <p>{uniqueSurvey.Subproductos}</p>
+               
+                </div>
+                <div className='cardSurveyMain_container-row'>
+                  <h1>Categoría</h1>
+                  <p>{uniqueSurvey.Productos_Categoria}</p>
                   {console.log(uniqueSurvey)}
                 </div>
               </div>

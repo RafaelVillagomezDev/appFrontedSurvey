@@ -181,6 +181,10 @@ function FormRegister() {
             <div className="error_container">
               {errors.dni && <p className="error_text">{errors.dni}</p>}
             </div>
+          
+          </div>
+          <div className="form_div" >
+          
             <div className="form_div-group">
               <label htmlFor="email">Email</label>
               <input
@@ -236,6 +240,7 @@ function FormRegister() {
                 <p className="error_text">{errors.password}</p>
               )}
             </div>
+            <div className="form_div-input">
             <div className="form_input-group">
               <input
                 id="privacy_policy"
@@ -244,7 +249,7 @@ function FormRegister() {
                 value={"accept"}
                 required
               />
-              <label htmlFor="privacy_policy">Politica de privacidad</label>
+            <label htmlFor="privacy_policy">Politica de privacidad</label>
             </div>
             <button
               className="form_btn-submit"
@@ -254,6 +259,8 @@ function FormRegister() {
             >
               Register
             </button>
+            </div>
+          
           </div>
         </form>
       </div>

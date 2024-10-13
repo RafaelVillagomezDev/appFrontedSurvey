@@ -60,24 +60,21 @@
   display: flex;
   font-family: $base_font-geo;
   font-size: $base_size;
-  flex-direction: column;
   justify-content: center;
-  width: 100%;
-  max-width: 380px;
   border-radius: 12px;
+  column-gap: 2rem;
   padding-bottom: 1rem;
+  width: 100%;
+  flex-direction: column;
   @include media(sm) {
-    width: 100%;
+    flex-direction: row;
   }
 }
 
 .form_div {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 2rem;
+  width: 100%;
   @include media(sm) {
-    padding: 1.7rem;
+    width: 50%
   }
 }
 
@@ -102,6 +99,9 @@
 }
 
 
+.form_div-input{
+  margin-top: 2rem;
+}
 
 .form_input-group {
   display: flex;
@@ -110,6 +110,7 @@
   font-size: 18px;
   font-family: $base_font-geo;
   padding-top: 1rem;
+  padding-bottom: 1rem;
   label {
     color: $base_text;
     font-size: 18px;
@@ -131,7 +132,7 @@
 
 .error_container {
   position: relative;
-  min-height: 1.5rem; /* Espacio reservado */
+  min-height: 2rem;
 }
 
 .error_text {
@@ -140,4 +141,5 @@
   color: red;
   position: absolute;
   font-size: $base_size;
+  padding: 0.5rem;
 }
