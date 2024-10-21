@@ -4,7 +4,7 @@ import DOMPurify from "dompurify";
 import MySwal from "sweetalert2";
 import { registerUser } from "../../services/auth/registerUser";
 
-function FormRegister() {
+function FormRegisterCompany(){
   const navigate = useNavigate();
 
   const navigateLogin = () => {
@@ -18,6 +18,8 @@ function FormRegister() {
     email: "",
     password: "",
     birthday: "",
+    nif: "",
+    tipo_compania:""
   });
 
   const [errors, setErrors] = useState({});
@@ -44,6 +46,18 @@ function FormRegister() {
       regex_plus: /^[XYZ]\d{7}[A-HJ-NP-TV-Z]$/,
       msg: "El Dni o Nie es invalido",
     },
+    {
+      field: "nif",
+      regex: /^\d{8}[A-HJ-NP-TV-Z]$/,
+      regex_plus: /^[XYZ]\d{7}[A-HJ-NP-TV-Z]$/,
+      msg: "El NIF es invalido",
+    }, 
+    {
+      field: "tipo_compania",
+      regex: /^[A-Za-z]{3,}$/,
+      msg: "El tipo de compañia es invalido",
+    },
+    
     {
       field: "password",
       regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@*?#$%^&+=!]).{8,20}$/,
@@ -181,7 +195,23 @@ function FormRegister() {
             <div className="error_container">
               {errors.dni && <p className="error_text">{errors.dni}</p>}
             </div>
-          
+            <div className="form_div-group">
+              <label htmlFor="nif">Nif</label>
+              <input
+                id="nif"
+                type="text"
+                maxLength={9}
+                name="nif"
+                autoComplete="nif"
+                placeholder="Nif"
+                value={formData.nif}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="error_container">
+              {errors.nif && <p className="error_text">{errors.nif}</p>}
+            </div>
           </div>
           <div className="form_div">
             <div className="form_div-group">
@@ -239,7 +269,25 @@ function FormRegister() {
                 <p className="error_text">{errors.password}</p>
               )}
             </div>
-           
+
+            <div className="form_div-group">
+              <label htmlFor="tipo_compania">Tipo compañia</label>
+              <input
+                id="tipo_compania"
+                type="text"
+                maxLength={9}
+                name="tipo_compania"
+                autoComplete="tipo_compania"
+                placeholder="Tipo compañia"
+                value={formData.tipo_compania}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="error_container">
+              {errors.tipo_compania && <p className="error_text">{errors.tipo_compania}</p>}
+            </div>
+
             <div className="form_div-input">
               <div className="form_input-group">
                 <input
@@ -261,12 +309,10 @@ function FormRegister() {
               </button>
             </div>
           </div>
-
-         
         </form>
       </div>
     </>
   );
 }
 
-export default FormRegister;
+export default FormRegisterCompany;

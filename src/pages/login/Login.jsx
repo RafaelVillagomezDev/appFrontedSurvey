@@ -29,6 +29,10 @@ function Login() {
     navigate("/register");
   };
 
+  const navigateRegisterCompany = () => {
+    navigate("/register/company");
+  };
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -181,8 +185,8 @@ function Login() {
               <span>o</span>
               <p className="main_box-register">
                 <span>
-                  ¿No tienes una cuenta?{" "}
-                  <a onClick={navigateRegister}>Registrate</a>
+                  ¿No tienes una cuenta? Registrate como 
+                  <a onClick={navigateRegister}> Usuario</a> o  <a onClick={navigateRegisterCompany}>Empresa</a>
                 </span>
               </p>
             </div>

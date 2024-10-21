@@ -34,7 +34,8 @@ const routes = createRoutesFromElements(
     <Route path="/" element={<Login />} />
     <Route path="login" element={<Login />} />
     <Route path="*" element={<Error />} />
-    <Route path="register" element={<Register />} />
+    <Route path="register" element={<Register  company={false}/>} />
+    <Route path="register/company" element={<Register company={true} />} />
     <Route path="/" element={<ProtectedRoutes />}>
       <Route path="app" element={<Home />} />
       <Route path="create" element={<CreateSurvey />} />
