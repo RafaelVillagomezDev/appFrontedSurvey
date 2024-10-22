@@ -2,7 +2,8 @@ import React, { lazy, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import MySwal from "sweetalert2";
-import { registerUser } from "../../services/auth/registerUser";
+import { useFetch } from "../../customHooks/call/useFetch";
+
 
 function FormRegisterCompany(){
   const navigate = useNavigate();
@@ -19,10 +20,16 @@ function FormRegisterCompany(){
     password: "",
     birthday: "",
     nif: "",
-    tipo_compania:""
+    tipo_compania:"",
+    rol:"admin"
   });
 
   const [errors, setErrors] = useState({});
+
+  const [url, setUrl] = useState(null); // Controlamos la URL solo cuando se envía el formulario
+  const [options, setOptions] = useState(null); 
+  
+
 
   const regexPatterns = [
     {
@@ -48,8 +55,7 @@ function FormRegisterCompany(){
     },
     {
       field: "nif",
-      regex: /^\d{8}[A-HJ-NP-TV-Z]$/,
-      regex_plus: /^[XYZ]\d{7}[A-HJ-NP-TV-Z]$/,
+      regex: /^[A-HJ-NP-S]\d{8}[A-Z\d]?$/,
       msg: "El NIF es invalido",
     }, 
     {
@@ -104,25 +110,48 @@ function FormRegisterCompany(){
     }));
   };
 
+
+    
+  const { data, isLoading, error}= useFetch(url,options,formData,"","",0)
+
   const submitRegister = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await registerUser(formData);
+    const options = {
+      method: 'POST',
+    };
+  
+    const url=`http://localhost:3445/api/v1/auth/registerAdmin`;
+  
+    setUrl(url)
+    setOptions(options)
 
-      MySwal.fire({
-        icon: "success",
-        title: "Se ha creado con exito su cuenta , vuelva a iniciar sesion",
-        text: response.messague,
-      });
-    } catch (error) {
-      MySwal.fire({
-        icon: "error",
-        title: "Error",
-        text: error,
-      });
-      console.error("Error:", error);
-    }
+    console.log(formData)
+    
+   
+     
+      if(error){
+        MySwal.fire({
+          icon: "error",
+          title: "Error",
+          text: error,
+        });
+      
+      }else{
+        MySwal.fire({
+          icon: "success",
+          title: "Se ha creado con exito su cuenta , vuelva a iniciar sesion",
+          text: data.messague,
+        });
+  
+      }
+    
+     
+     
+  
+     
+    
+    
   };
 
   return (

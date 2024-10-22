@@ -1,3 +1,6 @@
+const { useFetch } = require("../../customHooks/call/useFetch");
+
+
 const registerUser = async (obj) => {
     const { email, name_user,dni, surname, password,birthday } = obj;
   
@@ -37,7 +40,8 @@ const registerUser = async (obj) => {
       throw new Error(error); // Puedes volver a lanzar el error para que sea manejado por el código que llama a esta función
     }
   };
-  
+
+
   module.exports={
     registerUser
   }
