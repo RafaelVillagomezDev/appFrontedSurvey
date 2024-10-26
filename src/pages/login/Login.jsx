@@ -1,6 +1,6 @@
-import React, { lazy, useState } from "react";
+import React, { lazy, startTransition, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authUser, login } from "../../slices/login/loginSlice";
+import { authUser} from "../../slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import PortadaLogin from "../../../public/assets/img/Portada_login.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -10,6 +10,7 @@ import DOMPurify from "dompurify";
 
 const Footer = lazy(() => import("../../components/footer/Footer"));
 
+const Spinner = lazy(() => import("../../components/spinner/Spinner"));
 
 // Carga dinámica del CSS
 import("styles/_index.scss").then(() => {
@@ -22,6 +23,8 @@ import("../../styles/pages/_login.scss").then(() => {
 
 function Login() {
   const dispatch = useDispatch();
+
+  const loading = useSelector((state) => state.user.loading);
 
   const navigate = useNavigate();
 
@@ -88,23 +91,27 @@ function Login() {
   };
 
   const loginUser = async (event) => {
-    event.preventDefault();
-
     try {
-      const result = await dispatch(authUser(formData));
+      event.preventDefault();
+      const data = await dispatch(authUser(formData));
 
       // Aquí verificamos si la acción fue rechazada con un valor usando isRejectedWithValue
-      if (isRejectedWithValue(result)) {
+      if (isRejectedWithValue(data)) {
         MySwal.fire({
           icon: "error",
           title: "Error",
-          text: result.payload || "An unknown error occurred!", // Muestra el mensaje de error
+          text: data.payload || "An unknown error occurred!", // Muestra el mensaje de error
           allowOutsideClick: true, // Permite hacer clic fuera para cerrar
           allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
           allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
         });
+      }else{
+        startTransition(()=>{
+          navigate("/app");
+        })
+       
       }
-      navigate("/app");
+     
     } catch (error) {
       // Cualquier otro error que no sea manejado por rejectWithValue
       MySwal.fire({
@@ -176,8 +183,9 @@ function Login() {
                   className="form_login-submit"
                   type="submit"
                   onClick={loginUser}
+                  disabled={loading}
                 >
-                  Login
+                  {loading?<Spinner/>:"Login"}
                 </button>
               </div>
             </form>
@@ -185,8 +193,9 @@ function Login() {
               <span>o</span>
               <p className="main_box-register">
                 <span>
-                  ¿No tienes una cuenta? Registrate como 
-                  <a onClick={navigateRegister}> Usuario</a> o  <a onClick={navigateRegisterCompany}>Empresa</a>
+                  ¿No tienes una cuenta? Registrate como
+                  <a onClick={navigateRegister}> Usuario</a> o{" "}
+                  <a onClick={navigateRegisterCompany}>Empresa</a>
                 </span>
               </p>
             </div>

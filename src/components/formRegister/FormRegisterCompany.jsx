@@ -1,12 +1,17 @@
-import React, { lazy, useState } from "react";
+import React, {useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import MySwal from "sweetalert2";
-import { useFetch } from "../../customHooks/call/useFetch";
+import { useDispatch, useSelector } from "react-redux";
+import {registerAdmin } from "../../slices/login/loginSlice";
+import { isRejectedWithValue } from "@reduxjs/toolkit";
 
 
-function FormRegisterCompany(){
+
+function FormRegisterCompany() {
   const navigate = useNavigate();
+  const dispath = useDispatch();
+  const loading = useSelector((state) => state.user.loading);
 
   const navigateLogin = () => {
     navigate("/login");
@@ -20,16 +25,11 @@ function FormRegisterCompany(){
     password: "",
     birthday: "",
     nif: "",
-    tipo_compania:"",
-    rol:"admin"
+    tipo_compania: "",
+    rol: "admin",
   });
 
   const [errors, setErrors] = useState({});
-
-  const [url, setUrl] = useState(null); // Controlamos la URL solo cuando se envía el formulario
-  const [options, setOptions] = useState(null); 
-  
-
 
   const regexPatterns = [
     {
@@ -57,13 +57,13 @@ function FormRegisterCompany(){
       field: "nif",
       regex: /^[A-HJ-NP-S]\d{8}[A-Z\d]?$/,
       msg: "El NIF es invalido",
-    }, 
+    },
     {
       field: "tipo_compania",
       regex: /^[A-Za-z]{3,}$/,
       msg: "El tipo de compañia es invalido",
     },
-    
+
     {
       field: "password",
       regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@*?#$%^&+=!]).{8,20}$/,
@@ -110,48 +110,40 @@ function FormRegisterCompany(){
     }));
   };
 
-
-    
-  const { data, isLoading, error}= useFetch(url,options,formData,"","",0)
-
   const submitRegister = async (event) => {
-    event.preventDefault();
-
-    const options = {
-      method: 'POST',
-    };
-  
-    const url=`http://localhost:3445/api/v1/auth/registerAdmin`;
-  
-    setUrl(url)
-    setOptions(options)
-
-    console.log(formData)
-    
-   
-     
-      if(error){
+    try {
+      event.preventDefault();
+      const data = await dispath(registerAdmin(formData));
+      if (isRejectedWithValue(data)) {
         MySwal.fire({
           icon: "error",
           title: "Error",
-          text: error,
+          text: data.payload.message,
+          allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+          allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+          allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
         });
-      
-      }else{
+      } else {
         MySwal.fire({
           icon: "success",
           title: "Se ha creado con exito su cuenta , vuelva a iniciar sesion",
-          text: data.messague,
+          text: data.payload.message,
+          allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+          allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+          allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
         });
-  
+        
       }
-    
-     
-     
-  
-     
-    
-    
+    } catch (error) {
+      MySwal.fire({
+        icon: "error",
+        title: "Error",
+        text: error,
+        allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+        allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+        allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
+      });
+    }
   };
 
   return (
@@ -178,7 +170,7 @@ function FormRegisterCompany(){
                 type="text"
                 maxLength={50}
                 name="name_user"
-                autoComplete="name_user"
+                autoComplete="given-name"
                 placeholder="Nombre"
                 value={formData.name}
                 onChange={handleChange}
@@ -197,7 +189,7 @@ function FormRegisterCompany(){
                 type="text"
                 maxLength={50}
                 name="surname"
-                autoComplete="surname"
+                autoComplete="family-name"
                 placeholder="Apellido"
                 value={formData.surname}
                 onChange={handleChange}
@@ -314,7 +306,9 @@ function FormRegisterCompany(){
               />
             </div>
             <div className="error_container">
-              {errors.tipo_compania && <p className="error_text">{errors.tipo_compania}</p>}
+              {errors.tipo_compania && (
+                <p className="error_text">{errors.tipo_compania}</p>
+              )}
             </div>
 
             <div className="form_div-input">
@@ -328,13 +322,15 @@ function FormRegisterCompany(){
                 />
                 <label htmlFor="privacy_policy">Politica de privacidad</label>
               </div>
+          
               <button
                 className="form_btn-submit"
                 type="submit"
                 value={"registrar"}
                 onClick={submitRegister}
+                disabled={loading}
               >
-                Register
+               Registrate
               </button>
             </div>
           </div>

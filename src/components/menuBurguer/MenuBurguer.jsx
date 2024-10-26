@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { startTransition, useState } from "react";
 import { GrClose } from "react-icons/gr";
 import { NavLink, useNavigate } from "react-router-dom";
 import { itemLinks } from "./menuList/menuList";
@@ -9,7 +9,10 @@ import { logout } from "../../slices/login/loginSlice";
 function MenuBurguer(props) {
   const dispatch = useDispatch();
   const salir = () => {
-    dispatch(logout());
+    startTransition(()=>{
+      dispatch(logout());
+    })
+    
   };
 
   const [openItemIndex, setOpenItemIndex] = useState(null);

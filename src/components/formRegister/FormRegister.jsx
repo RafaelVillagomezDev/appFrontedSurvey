@@ -2,11 +2,13 @@ import React, { lazy, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import MySwal from "sweetalert2";
-import { registerUser } from "../../services/auth/registerUser";
+import { useDispatch } from "react-redux";
+import {registerUser} from "../../slices/login/loginSlice";
+import { isRejectedWithValue } from "@reduxjs/toolkit";
 
 function FormRegister() {
   const navigate = useNavigate();
-
+  const dispath = useDispatch();
   const navigateLogin = () => {
     navigate("/login");
   };
@@ -18,6 +20,7 @@ function FormRegister() {
     email: "",
     password: "",
     birthday: "",
+    rol:"user"
   });
 
   const [errors, setErrors] = useState({});
@@ -91,23 +94,38 @@ function FormRegister() {
   };
 
   const submitRegister = async (event) => {
-    event.preventDefault();
-
     try {
-      const response = await registerUser(formData);
-
-      MySwal.fire({
-        icon: "success",
-        title: "Se ha creado con exito su cuenta , vuelva a iniciar sesion",
-        text: response.messague,
-      });
+      event.preventDefault();
+      const data = await dispath(registerUser(formData));
+      if (isRejectedWithValue(data)) {
+        MySwal.fire({
+          icon: "error",
+          title: "Error",
+          text: data.payload.message,
+          allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+          allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+          allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
+        });
+      } else {
+        MySwal.fire({
+          icon: "success",
+          title: "Se ha creado con exito su cuenta , vuelva a iniciar sesion",
+          text: data.payload.message,
+          allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+          allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+          allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
+        });
+        
+      }
     } catch (error) {
       MySwal.fire({
         icon: "error",
         title: "Error",
         text: error,
+        allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+        allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+        allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
       });
-      console.error("Error:", error);
     }
   };
 
@@ -135,7 +153,7 @@ function FormRegister() {
                 type="text"
                 maxLength={50}
                 name="name_user"
-                autoComplete="name_user"
+                autoComplete="given-name"
                 placeholder="Nombre"
                 value={formData.name}
                 onChange={handleChange}
@@ -154,7 +172,7 @@ function FormRegister() {
                 type="text"
                 maxLength={50}
                 name="surname"
-                autoComplete="surname"
+                autoComplete="family-name"
                 placeholder="Apellido"
                 value={formData.surname}
                 onChange={handleChange}

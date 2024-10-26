@@ -10,6 +10,7 @@ const initialState = {
   survey: [],
   uniqueSurvey:[],
   status: "idle",
+  loading:false,
   searchWord: "",
   optionSelect: "",
 };
@@ -63,35 +64,41 @@ export const surveySlice = createSlice({
     //Obtener encuestas
     builder.addCase(getSurvey.pending, (state) => {
       state.status = "loading";
+      state.loading=false;
     });
     builder.addCase(getSurvey.fulfilled, (state, action) => {
       state.status = "success";
-
+      state.loading=true;
       state.survey = action.payload.data;
     });
     builder.addCase(getSurvey.rejected, (state) => {
       state.status = "failed";
+      state.loading=false;
     });
 
     //Obtener encuesta unica 
     builder.addCase(getUniqueSurvey.pending, (state) => {
       state.status = "loading";
+      state.loading=false;
     });
     builder.addCase(getUniqueSurvey.fulfilled, (state, action) => {
       state.status = "success";
-
+      state.loading=true;
       state.uniqueSurvey = action.payload.data[0];
     });
     builder.addCase(getUniqueSurvey.rejected, (state) => {
       state.status = "failed";
+      state.loading=false;
     });
 
     //Eliminar encuestas
     builder.addCase(deleteSurvey.pending, (state) => {
       state.status = "loading";
+      state.loading=false;
     });
     builder.addCase(deleteSurvey.fulfilled, (state, action) => {
       state.status = "success";
+      state.loading=true;
       const pos = state.survey.findIndex(
         (elem) => elem.id_encuesta === action.payload.id
       );
@@ -99,17 +106,21 @@ export const surveySlice = createSlice({
     });
     builder.addCase(deleteSurvey.rejected, (state) => {
       state.status = "failed";
+      state.loading=false;
     });
 
     //Crear encuestas
     builder.addCase(createSurvey.pending, (state) => {
       state.status = "loading";
+      state.loading=true;
     });
     builder.addCase(createSurvey.fulfilled, (state, action) => {
       state.status = "success";
+      state.loading=true;
     });
     builder.addCase(createSurvey.rejected, (state) => {
       state.status = "failed";
+      state.loading=false;
     });
   },
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import ErrorMonsterImg from "../../../public/assets/img/Portada_error.jpg"
+import ErrorMonsterImg from "../../../public/assets/img/Portada_error.webp"
 import { useNavigate } from "react-router-dom";
 
 import("styles/pages/_error.scss").then(() => {
@@ -8,8 +8,6 @@ import("styles/pages/_error.scss").then(() => {
 });
 
 function Error() {
-
-
 
   const navigate = useNavigate();
 
