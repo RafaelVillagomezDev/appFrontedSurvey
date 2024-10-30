@@ -18,12 +18,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoutes, isRol } from "./utils/auth/ProtectedRoutes";
 import LoadingScreen from "./pages/loadingScreen/LoadingScreen";
+4
 const Register = lazy(() => import("./pages/register/Register"));
 const Login = lazy(() => import("./pages/login/Login"));
 const Home = lazy(() => import("./pages/home/Home"));
-const CreateSurvey = lazy(() => import("./pages/create/CreateSurvey"));
+const SurveyCreate = lazy(() => import("./pages/survey/SurveyCreate"));
 const Update = lazy(() => import("./pages/update/Update"));
 const Survey = lazy(() => import("./pages/survey/Survey"));
+const ProductCreate = lazy(() => import("./pages/product/ProductCreate"));
 const Error = lazy(() => import("./pages/error/Error"));
 
 
@@ -38,9 +40,9 @@ const routes = createRoutesFromElements(
     <Route path="register/company" element={<Register company={true} />} />
     <Route path="/" element={<ProtectedRoutes />}>
       <Route path="app" element={<Home />} />
-      <Route path="create" element={<CreateSurvey />} />
-      <Route path="update" element={<Update />} />
       <Route path="survey/:id_encuesta" element={<Survey/>} />
+      <Route path="survey/create" element={<SurveyCreate/>} />
+      <Route path="product/create" element={<ProductCreate/>} />
     </Route>
   </>
 ); 

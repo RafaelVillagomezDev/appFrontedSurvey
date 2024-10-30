@@ -7,7 +7,6 @@ const devConfig = {
     headers: {
       "Access-Control-Allow-Origin": "*",
         'Cache-Control': 'no-store',
-      
     },
   
     client: {
@@ -16,6 +15,7 @@ const devConfig = {
     static: {
       directory: path.join(__dirname, "../src")
     },
+    publicPath:'/',
     watchFiles: [path.join(__dirname, "../src*")],
     host: "0.0.0.0",
     compress: true,
