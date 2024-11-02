@@ -5,12 +5,13 @@
   max-width: 940px;
 }
 
-.survey_main{
+.survey_main {
   margin: 2rem;
   display: flex;
   justify-content: space-around;
   border-radius: 15px;
   flex-direction: column;
+  background-color: $base_green;
   @include media(sm) {
     flex-direction: row;
   }
@@ -35,6 +36,16 @@
       padding: 10px 40px;
     }
   }
+
+  label {
+    font-family: $base_font-geo;
+    color: $base_white;
+  }
+
+  h2 {
+    font-family: $base_font-geo;
+    color: $base_white;
+  }
 }
 
 .box_survey {
@@ -44,43 +55,55 @@
   h1 {
     font-size: $base_size-title;
     text-align: center;
+    font-family: $base_font-geo;
+    color: $base_text;
+    font-weight: 300;
   }
 }
 
-.form_btn-continue{
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background-color:$base_text-violet;
-    color: $base_white;
-    cursor: pointer;
+.form_btn-continue {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: $base_black;
+  color: $base_white;
+  cursor: pointer;
 }
 
-
-.form_group-btn{
-    display: flex;
-    justify-content: space-around;
+.form_btn-create {
+  width: 40%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: $base_black;
+  color: $base_white;
+  cursor: pointer;
 }
 
-.form_btn-next{
-    width: 40%;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background-color:$base_text-violet;
-    color: $base_white;
-    cursor: pointer;
+.form_group-btn {
+  display: flex;
+  justify-content: space-around;
 }
 
-.form_btn-back{
-    width: 40%;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background-color:$base_text-ocean;
-    color: $base_white;
-    cursor: pointer; 
+.form_btn-next {
+  width: 40%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: $base_black;
+  color: $base_white;
+  cursor: pointer;
+}
+
+.form_btn-back {
+  width: 40%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: $base_white;
+  color: $base_black;
+  cursor: pointer;
 }
 
 /*Imagen*/
@@ -89,20 +112,19 @@
   width: 100%;
   min-width: 300px;
   height: auto;
-
 }
 /*Error*/
 .error_container {
-    position: relative;
-    min-height: 2rem;
-  }
-  
-  .error_text {
-    word-wrap: break-word; /* Permite que las palabras largas se dividan */
-    word-break: break-word; /* Otra opción para dividir palabras largas */
-    color: red;
-    position: absolute;
-    font-size: $base_size;
-    padding: 0.5rem;
-  }
-  
+  position: relative;
+  min-height: 2rem;
+}
+
+.error_text {
+  word-wrap: break-word; /* Permite que las palabras largas se dividan */
+  word-break: break-word; /* Otra opción para dividir palabras largas */
+  color: red;
+  position: absolute;
+  font-weight: 500;
+  font-size: $base_size;
+  padding: 0.5rem;
+}

@@ -2,8 +2,17 @@ import React, { memo, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import DOMPurify from "dompurify";
 import PortadaSurvey from "../../../public/assets/img/Portada_survey.webp";
+import MySwal from "sweetalert2";
+import { createContainer } from "../../slices/container/containerSlice";
+import { createProduct } from "../../slices/product/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Survey() {
+  const dispath = useDispatch();
+
+  const id_usuario = useSelector((state) => state.user.id_usuario);
+  const token = useSelector((state) => state.user.token);
+
   const [selectedOption, setSelectedOption] = useState("false");
 
   const [currentModal, setCurrentModal] = useState(0);
@@ -18,6 +27,10 @@ function Survey() {
 
   const [formData, setFormData] = useState({
     descripcion: "",
+    producto: "",
+    categoria: "",
+    pregunta: "",
+    subproducto: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -26,7 +39,27 @@ function Survey() {
     {
       field: "descripcion",
       regex: /^[A-Za-z]{4,}$/, // Formato estándar de correo electrónico
-      msg: "La descripcion debe de tener al menos 4 catacteres",
+      msg: "La descripcion debe de tener al menos 4 caracteres",
+    },
+    {
+      field: "producto",
+      regex: /^[A-Za-z]{4,}$/, // Formato estándar de correo electrónico
+      msg: "El producto debe de tener al menos 4 caracteres",
+    },
+    {
+      field: "categoria",
+      regex: /^[A-Za-z]{4,40}$$/, // Formato estándar de correo electrónico
+      msg: "La categoría debe de tener al menos 4 caracteres",
+    },
+    {
+      field: "pregunta",
+      regex: /^[A-Za-z]{4,40}$$/, // Formato estándar de correo electrónico
+      msg: "La pregunta debe de tener al menos 4 caracteres",
+    },
+    {
+      field: "subproducto",
+      regex: /^[A-Za-z]{4,40}$$/, // Formato estándar de correo electrónico
+      msg: "El subproducto debe de tener al menos 4 caracteres",
     },
   ];
 
@@ -68,6 +101,35 @@ function Survey() {
     setSelectedOption(event.target.value);
   };
 
+  const createSurvey = async () => {
+    const { descripcion, producto, categoria, subproducto, pregunta } =
+      formData;
+
+    try {
+      const id_container=await dispath(createContainer({ id_usuario, token }));
+      const [product] = await Promise.all([
+        
+        dispath(createProduct({
+          productos: [{ producto,categoria}],
+          id_container: id_container,
+        } ,token)),
+      ]);
+
+     
+
+      console.log(id_container);
+      console.log(product);
+    } catch (error) {
+      MySwal.fire({
+        icon: "error",
+        title: "Error",
+        text: error,
+        allowOutsideClick: true, // Permite hacer clic fuera para cerrar
+        allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
+        allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
+      });
+    }
+  };
   return (
     <div id="survey">
       <div className="survey_main">
@@ -80,31 +142,6 @@ function Survey() {
                 </div>
                 <div className="box_survey">
                   <div className="box_survey-group">
-                    <h2>Desea agregar su encuesta a un contenedor?</h2>
-                    <label htmlFor="opcion1">
-                      <input
-                        type="radio"
-                        id="opcion1"
-                        value={true}
-                        name="options_container"
-                        checked={selectedOption === "true"}
-                        onChange={handleOptionChange}
-                      />
-                      Sí
-                    </label>
-                    <label htmlFor="opcion2">
-                      <input
-                        type="radio"
-                        id="opcion2"
-                        value={false}
-                        name="options_container"
-                        checked={selectedOption === "false"}
-                        onChange={handleOptionChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  <div className="box_survey-group">
                     <label htmlFor="descripcion">
                       Escribe una descripción para tu encuesta
                     </label>
@@ -115,12 +152,13 @@ function Survey() {
                       placeholder="Escribe una descripcion"
                       onChange={handleChange}
                     />
+                    <div className="error_container">
+                      {errors.descripcion && (
+                        <p className="error_text">{errors.descripcion}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="error_container">
-                    {errors.descripcion && (
-                      <p className="error_text">{errors.descripcion}</p>
-                    )}
-                  </div>
+
                   <button
                     className="form_btn-continue"
                     type="button"
@@ -139,33 +177,34 @@ function Survey() {
                 </div>
                 <div className="box_survey">
                   <div className="box_survey-group">
-                    <label htmlFor="descripcion">Escribe un producto</label>
+                    <label htmlFor="producto">Escribe un producto</label>
                     <input
-                      id="descripcion"
+                      id="producto"
                       type="text"
-                      name="descripcion"
+                      name="producto"
                       placeholder="Escribe un producto"
                       onChange={handleChange}
                     />
+                    <div className="error_container">
+                      {errors.producto && (
+                        <p className="error_text">{errors.producto}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="error_container">
-                    {errors.descripcion && (
-                      <p className="error_text">{errors.descripcion}</p>
-                    )}
-                  </div>
+
                   <div className="box_survey-group">
-                    <label htmlFor="descripcion">Escribe una categoría</label>
+                    <label htmlFor="categoria">Escribe una categoría</label>
                     <input
-                      id="descripcion"
+                      id="categoria"
                       type="text"
-                      name="descripcion"
+                      name="categoria"
                       placeholder="Escribe una categoría"
                       onChange={handleChange}
                     />
                   </div>
                   <div className="error_container">
-                    {errors.descripcion && (
-                      <p className="error_text">{errors.descripcion}</p>
+                    {errors.categoria && (
+                      <p className="error_text">{errors.categoria}</p>
                     )}
                   </div>
                   <div className="form_group-btn">
@@ -182,6 +221,87 @@ function Survey() {
                       onClick={handleNextModal}
                     >
                       Siguiente
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            {currentModal == 2 && (
+              <div id="window_three">
+                <div className="box_survey">
+                  <h1>Escriba un subproducto</h1>
+                </div>
+                <div className="box_survey">
+                  <div className="box_survey-group">
+                    <label htmlFor="pregunta">Escribe un subproducto</label>
+                    <input
+                      id="subproducto"
+                      type="text"
+                      name="subproducto"
+                      placeholder="Escribe una subproducto"
+                      onChange={handleChange}
+                    />
+                    <div className="error_container">
+                      {errors.subproducto && (
+                        <p className="error_text">{errors.subproducto}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="form_group-btn">
+                  <button
+                    className="form_btn-back"
+                    type="button"
+                    onClick={handlePrevModal}
+                  >
+                    Atras
+                  </button>
+                  <button
+                    className="form_btn-next"
+                    type="button"
+                    onClick={handleNextModal}
+                  >
+                    Siguiente
+                  </button>
+                </div>
+              </div>
+            )}
+            {currentModal == 3 && (
+              <div id="window_three">
+                <div className="box_survey">
+                  <h1>Escriba sus preguntas</h1>
+                </div>
+                <div className="box_survey">
+                  <div className="box_survey-group">
+                    <label htmlFor="pregunta">Escribe una pregunta</label>
+                    <input
+                      id="pregunta"
+                      type="text"
+                      name="pregunta"
+                      placeholder="Escribe una pregunta"
+                      onChange={handleChange}
+                    />
+                    <div className="error_container">
+                      {errors.pregunta && (
+                        <p className="error_text">{errors.pregunta}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="form_group-btn">
+                    <button
+                      className="form_btn-back"
+                      type="button"
+                      onClick={handlePrevModal}
+                    >
+                      Atras
+                    </button>
+                    <button
+                      className="form_btn-create"
+                      type="button"
+                      onClick={createSurvey}
+                    >
+                      Crear encuesta
                     </button>
                   </div>
                 </div>

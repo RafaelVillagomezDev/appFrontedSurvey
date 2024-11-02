@@ -8,8 +8,9 @@ import { customFetch } from "../../utils/customFetch";
 
 
 const initialState = {
-  user: [], // Cambiado a null si solo hay un usuario
+  user: {}, // Cambiado a null si solo hay un usuario
   token:getLocalStorage("token")|| null,
+  id_usuario:"",
   status: "idle", // Estado para manejar el estado de la solicitud
   loading: false,
   error:null,
@@ -75,10 +76,11 @@ export const loginSlice = createSlice({
       .addCase(authUser.fulfilled, (state, action) => {
         state.status = "success";
         state.loading=false
-        const decodeToken={...jwtDecode(action.payload.token)}
-        state.user.push(decodeToken); // Guardar el usuario directamente
+        const decodeToken=jwtDecode(action.payload.token)
+        state.user=decodeToken // Guardar el usuario directamente
         state.token=action.payload.token
         state.isAuthenticated = true;
+        state.id_usuario=decodeToken.id_user
         saveLocalStorage("token",action.payload.token)
       
       })

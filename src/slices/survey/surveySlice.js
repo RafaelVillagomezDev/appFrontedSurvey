@@ -5,6 +5,7 @@ import {
   getSurveyUnique,
   removeItemSurvey,
 } from "../../services/survey/surveyObj";
+import { customFetch } from "../../utils/customFetch";
 
 const initialState = {
   survey: [],
@@ -35,7 +36,7 @@ export const getUniqueSurvey = createAsyncThunk(
 export const createSurvey = createAsyncThunk(
   "surveySlice/createSurvey",
   async (dataSurvey) => {
-    const data = await addSurvey(dataSurvey);
+    const data = await customFetch("http://localhost:3445/api/v1/survey/create","POST","",dataSurvey)
     return data;
   }
 );

@@ -1,7 +1,7 @@
 import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit";
 import loginReducer from "../slices/login/loginSlice"
 import surveyReducer from "../slices/survey/surveySlice"
-
+import productReducer from "../slices/product/productSlice"
 /*
   Aqui debemos importar slice
 */
@@ -9,7 +9,8 @@ import surveyReducer from "../slices/survey/surveySlice"
 const store=configureStore({
   reducer:{
     user:loginReducer,
-    survey:surveyReducer
+    survey:surveyReducer,
+    product:productReducer
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware({
