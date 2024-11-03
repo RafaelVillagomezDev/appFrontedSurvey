@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import MySwal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import {registerUser} from "../../slices/login/loginSlice";
+import { registerUser } from "../../slices/login/loginSlice";
 import { isRejectedWithValue } from "@reduxjs/toolkit";
+
 
 function FormRegister() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ function FormRegister() {
     navigate("/login");
   };
 
+  const API_RECAPCHA=process.env.REACT_RECAPTCHA;
+
   const [formData, setFormData] = useState({
     name_user: "",
     surname: "",
@@ -20,7 +23,7 @@ function FormRegister() {
     email: "",
     password: "",
     birthday: "",
-    rol:"user"
+    rol: "user",
   });
 
   const [errors, setErrors] = useState({});
@@ -115,7 +118,6 @@ function FormRegister() {
           allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
           allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
         });
-        
       }
     } catch (error) {
       MySwal.fire({
@@ -199,7 +201,6 @@ function FormRegister() {
             <div className="error_container">
               {errors.dni && <p className="error_text">{errors.dni}</p>}
             </div>
-          
           </div>
           <div className="form_div">
             <div className="form_div-group">
@@ -257,7 +258,7 @@ function FormRegister() {
                 <p className="error_text">{errors.password}</p>
               )}
             </div>
-           
+
             <div className="form_div-input">
               <div className="form_input-group">
                 <input
@@ -269,6 +270,7 @@ function FormRegister() {
                 />
                 <label htmlFor="privacy_policy">Politica de privacidad</label>
               </div>
+              
               <button
                 className="form_btn-submit"
                 type="submit"
@@ -279,8 +281,6 @@ function FormRegister() {
               </button>
             </div>
           </div>
-
-         
         </form>
       </div>
     </>
