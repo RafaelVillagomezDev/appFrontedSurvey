@@ -1,71 +1,76 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const useForm = (fields, onSubmit, regexPatterns = []) => {
-    // Inicializamos formData con los campos definidos en fields
-    const [formData, setFormData] = useState(
-        fields.reduce((acc, field) => ({ ...acc, [field.name]: field.defaultValue || '' }), {})
-    );
-    const [errors, setErrors] = useState({});
-    const [isFormValid, setIsFormValid] = useState(false);
+  // Inicializamos formData con los campos definidos en fields
+  const [formData, setFormData] = useState(
+    fields.reduce(
+      (acc, field) => ({ ...acc, [field.id]: field.defaultValue || "" }),
+      {}
+    )
+  );
+  const [errors, setErrors] = useState({});
+ 
 
-    // Función de validación de un campo específico
-    const validateField = (name, value) => {
-        const pattern = regexPatterns.find(rule => rule.field === name);
-        let error = '';
+  // Función de validación de un campo específico
+  const validateField = (id, value) => {
+    const pattern = regexPatterns.find((rule) => rule.field === id);
+    let error = "";
 
-        if (pattern && value.length > 0) {
-            error = pattern.regex.test(value) ? '' : pattern.msg;
-        }
+    if (pattern && value.length > 0) {
+      error = pattern.regex.test(value) ? "" : pattern.msg;
+    }
 
-        setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
-        return !error;
-    };
+    // Actualizamos solo el error del campo específico
+    setErrors((prevErrors) => ({ ...prevErrors, [id]: error }));
+    return !error; // Retorna si hay error o no
+  };
 
-    // Manejo del cambio en los campos
-    const handleChange = (e) => {
-        const { name, type, checked, value } = e.target;
-        const newValue = type === 'checkbox' ? checked : value;
+  // Manejo del cambio en los campos
+  const handleChange = (e) => {
+    const { id, type, checked, value } = e.target;
+    const newValue = type === "checkbox" ? checked : value;
 
-        setFormData({
-            ...formData,
-            [name]: newValue,
-        });
+    // Actualizamos el valor del campo en formData
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: newValue,
+    }));
 
-        // Validamos el campo en el cambio
-        if (errors[name]) {
-            validateField(name, newValue);
-        }
+    // Validamos el campo en el cambio
+    validateField(id, newValue);
+  };
 
-        const isValid = fields.every(field => validateField(field.name, formData[field.name] || newValue));
-        setIsFormValid(isValid);
-    };
+  // Manejo del envío del formulario
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    // Manejo del envío del formulario
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const validationErrors = {};
+    fields.forEach((field) => {
+      if (!validateField(field.id, formData[field.id])) {
+        validationErrors[field.id] = true;
+      }
+    });
 
-        const validationErrors = {};
-        fields.forEach((field) => {
-            if (!validateField(field.name, formData[field.name])) {
-                validationErrors[field.name] = true;
-            }
-        });
+    if (Object.keys(validationErrors).length === 0) {
+      onSubmit(formData);
+      // Resetea el formulario después del envío
+      setFormData(
+        fields.reduce(
+          (acc, field) => ({ ...acc, [field.id]: field.defaultValue || "" }),
+          {}
+        )
+      );
+      setErrors({});
+     
+    }
+  };
 
-        if (Object.keys(validationErrors).length === 0) {
-            onSubmit(formData);
-            // Resetea el formulario después del envío
-            setFormData(fields.reduce((acc, field) => ({ ...acc, [field.name]: field.defaultValue || '' }), {}));
-            setErrors({});
-        }
-    };
-
-    return {
-        formData,
-        errors,
-        isFormValid,
-        handleChange,
-        handleSubmit,
-    };
+  return {
+    formData,
+    errors,
+    handleChange,
+    handleSubmit,
+  };
 };
 
 export default useForm;

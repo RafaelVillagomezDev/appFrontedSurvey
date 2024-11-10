@@ -1,39 +1,44 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
 
-const NavBar = lazy(() => import("../../components/navBar/NavBar"));
+const NavBarDefault = lazy(() => import("../../components/navBar/NavBarDefault"));
 const FormGeneric = lazy(() =>
   import("../../components/formGeneric/FormGeneric")
 );
 const Footer = lazy(() => import("../../components/footer/Footer"));
 
-import("styles/pages/_survey.scss").then(() => {
-  console.log("Survey styles loaded");
-});
+import("styles/pages/_productCreate.scss")
+  .then(() => {
+    console.log("Product styles loaded");
+  })
+  .catch((error) => {
+    console.error("Error loading product styles:", error);
+  });
 
 function ProductCreate() {
   const fields = [
     {
       name: "product",
-      id:"producto1",
+      id: "producto1",
       label: "Producto",
       required: true,
       placeholder: "Ingresa un producto",
+      maxLength: 9,
       className: "card_username",
     },
     {
       name: "product",
-      id:"producto2",
+      id: "producto2",
       label: "Producto",
       required: true,
+      maxLength: 9,
       placeholder: "Ingresa un producto",
       className: "card_username",
     },
-  
   ];
 
   const regexPatterns = [
     {
-      field: "product",
+      field: "producto1",
       regex: /^[A-Za-z0-9]{4,}$/,
       msg: "El nombre debe tener letras mayusculas o minusculas y al menos 4 caracteres, no se permiten caracteres especiales.",
     },
@@ -50,7 +55,7 @@ function ProductCreate() {
 
   return (
     <>
-      <NavBar />
+      <NavBarDefault/>
       <FormGeneric
         fields={fields}
         regexPatterns={regexPatterns}

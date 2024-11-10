@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkappfronted=self.webpackChunkappfronted||[]).push([[721],{3721:(e,p,s)=>{s.r(p)}}]);

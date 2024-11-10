@@ -5,13 +5,16 @@
   right: 0;
   z-index: 1;
   width: 60%;
+  top: 0;
   @include media(sm) {
     width: 60%;
     border: 1px solid black;
+    height: 100%;
   }
  
   @include media(lg) {
     width: 420px;
+    height: 100%;
   }
 }
 
@@ -72,4 +75,5 @@
 .menuBurger_navbar-sublink{
   display: flex;
   flex-direction: column;
+  padding: 6px;
 }

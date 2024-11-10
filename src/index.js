@@ -10,15 +10,12 @@ import {
   useLocation,
 } from "react-router-dom";
 import "./index.css";
-import "./format.css";
+
 import store from "./store/store";
 import { Provider } from "react-redux";
-import { getLocalStorage } from "./utils/storage/saveLocalStorage";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { ProtectedRoutes, isRol } from "./utils/auth/ProtectedRoutes";
 import LoadingScreen from "./pages/loadingScreen/LoadingScreen";
-4
 const Register = lazy(() => import("./pages/register/Register"));
 const Login = lazy(() => import("./pages/login/Login"));
 const Home = lazy(() => import("./pages/home/Home"));

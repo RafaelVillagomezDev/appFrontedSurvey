@@ -3,6 +3,14 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  height: 180px;
+  flex-direction: column;
+  gap: 2rem;
+  @include media(sm) {
+    height: 150px;
+
+    flex-direction: row;
+  }
 }
 
 .navbar_container {
@@ -10,13 +18,8 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 90px;
- 
- 
   @include media(sm) {
     margin: 2rem;
-    border-radius: 30px;
-    border: 1px solid gray;
   }
 }
 
@@ -38,5 +41,5 @@
   color: $base_text-blue;
   font-family: bold;
   font-size: $base_size-md;
+  font-weight: bold;
 }
-

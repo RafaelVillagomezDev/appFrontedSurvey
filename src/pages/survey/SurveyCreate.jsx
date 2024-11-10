@@ -1,20 +1,24 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
 
-const NavBar = lazy(() => import("../../components/navBar/NavBar"));
+const NavBarDefault = lazy(() => import("../../components/navBar/NavBarDefault"));
 const Survey = lazy(() => import("../../components/survey/Survey"));
 const Footer = lazy(() => import("../../components/footer/Footer"));
 
+import("styles/pages/_surveyCreate.scss")
+.then(() => {
+  console.log("Survey styles loaded");
+})
+.catch((error) => {
+  console.error("Error loading survey styles:", error);
+});
 
-import("styles/pages/_surveyCreate.scss").then(() => {
-    console.log("Survey Create styles loaded");
-  });
-
-  
 function SurveyCreate() {
+ 
+
   return (
     <>
-      <NavBar />
-      <Survey/>
+      <NavBarDefault/>
+      <Survey />
       <Footer />
     </>
   );

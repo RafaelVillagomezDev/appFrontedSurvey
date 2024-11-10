@@ -1,11 +1,13 @@
 @import "../mixin";
 @import "../base/base";
+@import "../components/searchBar";
 @import "../components/navbar";
 @import "../components/menuBurguer";
 @import "../components/cardSurvey";
-@import "../components/searchBar";
+
 @import "../components/spinner";
 @import "../components/footer";
+
 
 .home {
   width: 100%;

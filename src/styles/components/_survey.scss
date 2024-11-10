@@ -12,8 +12,11 @@
   border-radius: 15px;
   flex-direction: column;
   background-color: $base_green;
+  justify-content: center;
+  align-items: center;
   @include media(sm) {
     flex-direction: row;
+    padding: 2rem;
   }
 }
 .container_survey {

@@ -1,16 +1,143 @@
 @import "../mixin";
 @import "../base/base";
-@import "../components/formRegister";
 @import "../components/spinner";
 @import "../components/footer";
 
-
-#container_main{
- 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-   
+#container_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+
+#img_register{
+  width:fit-content;
+}
+
+#container_main-flex {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  width: 100%;
+  align-items: center;
+  gap: 2rem;
+  h1 {
+    font-size: $base_size-lg;
+    font-family: $base_font-geo;
+    text-align: center;
+    font-weight: bold;
+    color: $base_text-blue;
+    text-align: center;
+  }
+}
+
+.container_main-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  @include media(sm) {
+    flex-direction: row;
+  }
+}
+
+.box_text {
+  font-size: $base_size;
+  font-family: $base_font-geo;
+  color: $base_text;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.btn_login {
+  border-radius: 4px;
+  background-color: $base_text-ocean;
+  outline: none;
+  padding: 12px;
+  border: 0;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.box_option-choice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+  justify-content: center;
+  div {
+    height: 1px;
+    width: 100%;
+    background-color: gray;
+    @include media(sm) {
+      width: 145px;
+    }
+  }
+}
+
+#form_register {
+  display: flex;
+  font-family: $base_font-geo;
+  font-size: $base_size;
+  justify-content: center;
+  border-radius: 12px;
+  column-gap: 2rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  flex-direction: column;
+  @include media(sm) {
+    width: 50%;
+  }
+}
+
+.form_div-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  font-family: $base_font-geo;
+}
+
+.form_input {
+  border: 0;
+  background-color: white;
+  outline: none;
+  border-bottom: solid gray 2px;
+  padding: 0.5rem;
+}
+
+.form_btn-submit {
+  border-radius: 4px;
+  background-color: $base_text-violet;
+  outline: none;
+  padding: 12px;
+  border: 0;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.error_container {
+  position: relative;
+  min-height: 2rem;
+  @include media(sm) {
+    min-height: 3rem;
+  }
+}
+
+.error {
+  word-wrap: break-word; /* Permite que las palabras largas se dividan */
+  word-break: break-word; /* Otra opción para dividir palabras largas */
+  color: red;
+  position: absolute;
+  font-size: $base_size;
+  padding: 0.5rem;
+}

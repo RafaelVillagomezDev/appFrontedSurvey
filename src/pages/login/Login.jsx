@@ -1,21 +1,17 @@
-import React, { lazy, startTransition, useState } from "react";
+import React, { lazy, startTransition } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authUser} from "../../slices/login/loginSlice";
+import { authUser } from "../../slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import PortadaLogin from "../../../public/assets/img/Portada_login.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import MySwal from "sweetalert2";
 import { isRejectedWithValue } from "@reduxjs/toolkit";
-import DOMPurify from "dompurify";
 
 const Footer = lazy(() => import("../../components/footer/Footer"));
-
+const FormGeneric = lazy(() =>
+  import("../../components/formGeneric/FormGeneric")
+);
 const Spinner = lazy(() => import("../../components/spinner/Spinner"));
-
-// Carga dinámica del CSS
-import("styles/_index.scss").then(() => {
-  console.log("Reset styles loaded");
-});
 
 import("../../styles/pages/_login.scss").then(() => {
   console.log("Login styles loaded");
@@ -36,12 +32,28 @@ function Login() {
     navigate("/register/company");
   };
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [errors, setErrors] = useState({});
+  const fields = [
+    {
+      name: "email",
+      id: "email",
+      type: "email",
+      label: "email",
+      required: true,
+      placeholder: "Ingresa un email",
+      className: "card_username",
+      maxLength: 40,
+    },
+    {
+      name: "password",
+      id: "password",
+      type: "password",
+      label: "password",
+      required: true,
+      placeholder: "Ingresa una password",
+      className: "card_username",
+      maxLength: 40,
+    },
+  ];
 
   const regexPatterns = [
     {
@@ -56,46 +68,11 @@ function Login() {
     },
   ];
 
-  const validateField = (name, value) => {
-    const pattern = regexPatterns.find((rule) => rule.field === name);
-
-    if (pattern && value.length > 0) {
-      if (pattern.regex_plus) {
-        return pattern.regex.test(value) || pattern.regex_plus.test(value)
-          ? ""
-          : pattern.msg;
-      } else {
-        return pattern.regex.test(value) ? "" : pattern.msg;
-      }
-    }
-    return "";
-  };
-
-  // Función para manejar cambios en los campos del formulario
-  const handleBlur = (event) => {
-    const { name, value } = event.target;
-
-    // Validar el campo actual
-    const errorMsg = validateField(name, DOMPurify.sanitize(value));
-
-    // Actualizar los errores
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: errorMsg,
-    }));
-
-    setFormData((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
-
-  const loginUser = async (event) => {
+  const handleSubmit = async (formData) => {
     try {
-      event.preventDefault();
+      console.log(formData);
       const data = await dispatch(authUser(formData));
 
-      // Aquí verificamos si la acción fue rechazada con un valor usando isRejectedWithValue
       if (isRejectedWithValue(data)) {
         MySwal.fire({
           icon: "error",
@@ -105,13 +82,11 @@ function Login() {
           allowEscapeKey: true, // Permite usar la tecla 'Escape' para cerrar
           allowEnterKey: true, // Permite cerrar con la tecla 'Enter'
         });
-      }else{
-        startTransition(()=>{
+      } else {
+        startTransition(() => {
           navigate("/app");
-        })
-       
+        });
       }
-     
     } catch (error) {
       // Cualquier otro error que no sea manejado por rejectWithValue
       MySwal.fire({
@@ -135,60 +110,22 @@ function Login() {
               id="img_portada"
               alt="Portada"
               height={80}
+              visibleByDefault={true}
             />
           </div>
           <div id="main_container_form">
             <h1>ClickSurvey</h1>
-            <form id="form_login">
-              <div className="form_login">
-                <div className="form_login-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    maxLength={50}
-                    name="email"
-                    autoComplete="username"
-                    defaultValue={formData.email}
-                    onBlur={handleBlur}
-                    placeholder="Email"
-                    required
-                  />
-                </div>
-                <div className="error_container">
-                  {errors.email && <p className="error_text">{errors.email}</p>}
-                </div>
-
-                <div className="form_login-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    id="password"
-                    type="password"
-                    maxLength={50}
-                    name="password"
-                    autoComplete="current-password"
-                    defaultValue={formData.password}
-                    onBlur={handleBlur}
-                    placeholder="Password"
-                    required
-                  />
-                </div>
-                <div className="error_container">
-                  {errors.password && (
-                    <p className="error_text">{errors.password}</p>
-                  )}
-                </div>
-
-                <button
-                  className="form_login-submit"
-                  type="submit"
-                  onClick={loginUser}
-                  disabled={loading}
-                >
-                  {loading?<Spinner/>:"Login"}
-                </button>
-              </div>
-            </form>
+            <FormGeneric
+              fields={fields}
+              regexPatterns={regexPatterns}
+              onSubmit={handleSubmit}
+              buttonText="Registrar"
+              id="form_login"
+              classDiv="form_login-group"
+              buttonClass="form_login-submit"
+              loading={loading}
+              loadingComponent={<Spinner />}
+            />
             <div id="main_container-register">
               <span>o</span>
               <p className="main_box-register">

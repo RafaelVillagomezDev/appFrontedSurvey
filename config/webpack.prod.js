@@ -19,11 +19,12 @@ const prodConfig = {
     splitChunks: {
       minSize: 17000,
       minRemainingSize: 0,
-      minChunks: 4,
+      minChunks: 6,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
       automaticNameDelimiter: "_",
       enforceSizeThreshold: 30000,
+      chunks:"all",
       cacheGroups: {
         common: {
           test: /[\\/]node_modules[\\/]/,
@@ -46,7 +47,7 @@ const prodConfig = {
           enforce: true, 
         },
         default: {
-          minChunks: 4,
+          minChunks: 6,
           priority: -20,
           reuseExistingChunk: true,
         },
