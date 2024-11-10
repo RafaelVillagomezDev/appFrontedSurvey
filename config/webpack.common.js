@@ -2,7 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require("dotenv-webpack");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const envPath = path.resolve(__dirname, ".env");
 
@@ -23,7 +24,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".html", ".css", ".scss"],
     alias: {
-      styles: path.resolve(__dirname, "../src/styles")
+      styles: path.resolve(__dirname, "../src/styles"),
     },
   },
 
@@ -36,6 +37,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css", // Genera un archivo CSS por entrada
       chunkFilename: "[id].[contenthash].css", // Nombre para fragmentos CSS
+    }),
+    new CompressionPlugin({
+      test: /\.(js|css|html|svg|json|jpg|jpeg|webp|jsx|scss|png|gif|woff|woff2|eot|ttf)$/, // Archivos que se van a comprimir
+      filename: "[path][base].gz", // Nombre del archivo comprimido
+      algorithm: "gzip", // Algoritmo de compresión (también puede usar 'brotliCompress')
+      threshold: 10240, // Sólo comprimir archivos mayores a 10KB
+      minRatio: 0.8, // Sólo comprimir archivos que puedan reducir su tamaño en un 20%
     }),
 
     new CleanWebpackPlugin(),

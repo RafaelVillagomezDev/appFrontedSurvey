@@ -19,7 +19,7 @@ const prodConfig = {
     splitChunks: {
       minSize: 17000,
       minRemainingSize: 0,
-      minChunks: 6,
+      minChunks: 9,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
       automaticNameDelimiter: "_",

@@ -6,13 +6,16 @@ import { registerUser } from "../../slices/login/loginSlice";
 import { isRejectedWithValue } from "@reduxjs/toolkit";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import PortadaRegister from "../../../public/assets/img/Portada_register.webp";
+import "react-lazy-load-image-component/src/effects/blur.css"; // Si deseas un efecto de difuminado de carga
+
+import("styles/pages/_register.scss").then(() => {
+  console.log("Register styles loaded");
+});
 const Footer = lazy(() => import("../../components/footer/Footer"));
 const FormGeneric = lazy(() =>
   import("../../components/formGeneric/FormGeneric")
 );
-import("styles/pages/_register.scss").then(() => {
-  console.log("Register styles loaded");
-});
+
 
 const fields = [
   {
@@ -185,6 +188,8 @@ function Register({ company }) {
               height={500}
               src={PortadaRegister}
               visibleByDefault={true}
+              effect="blur" 
+              loading="lazy" 
             />
           </div>
         </div>

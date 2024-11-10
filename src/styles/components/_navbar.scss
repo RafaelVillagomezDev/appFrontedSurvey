@@ -8,7 +8,6 @@
   gap: 2rem;
   @include media(sm) {
     height: 150px;
-
     flex-direction: row;
   }
 }
