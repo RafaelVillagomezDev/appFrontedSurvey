@@ -4,11 +4,30 @@
 @import "../components/footer";
 
 
+#main_component-yellow{
+   position: absolute;
+   left: 0;
+   top: 20px;
+   display: none;
+   @include media(md) {
+      display: block;
+   }
+}
+
+#main_component-green{
+  position: absolute;
+  left: 0;
+  bottom: 100px;
+  display: none;
+  @include media(md) {
+    display: block;
+ }
+}
+
 #wrapper {
   display: flex;
   flex-direction: column;
-  margin: 2rem;
-  min-height: 93vh;
+  min-height: 100vh;
 }
 
 #main {
@@ -17,12 +36,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+ 
 }
 
 #main_container {
   display: flex;
   gap: 2rem;
   justify-content: space-around;
+  padding: 2rem;
 }
 
 #main_container-portada {
@@ -44,7 +65,7 @@
   flex-direction: column;
   border: solid 1px gray;
   h1 {
-    font-family: $base_font-geo;
+    font-family: $base_font-fredooka;
     font-optical-sizing: auto;
     font-weight: bold;
     font-size: $base_size-lg;
@@ -142,6 +163,10 @@
     cursor: pointer;
     color: $base_text-violet;
     font-weight: bold;
+    line-height: 20px;
+    @include media(sm) {
+      line-height: 5px;
+    }
   }
 }
 

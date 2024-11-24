@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 
-const NavBar = lazy(() => import("../../components/navBar/NavBar"));
+
+const NavBarDefault = lazy(() => import("../../components/navBar/NavBarDefault"));
 const CardSurveyMain = lazy(() =>
   import("../../components/cardSurveyMain/CardSurveyMain")
 );
@@ -15,7 +16,7 @@ import("styles/pages/_survey.scss").then(() => {
 function Survey() {
   return (
     <>
-      <NavBar />
+      <NavBarDefault/>
       <CardSurveyMain />
       <Footer />
     </>

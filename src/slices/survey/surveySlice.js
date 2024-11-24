@@ -19,7 +19,7 @@ const initialState = {
 export const getSurvey = createAsyncThunk(
   "surveySlice/fetchSurvey",
   async (token) => {
-    const data = await getListSurvey(token);
+    const data = await  customFetch("http://localhost:3445/api/v1/survey","GET",token,"");
     return data;
   }
 );

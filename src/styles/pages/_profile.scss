@@ -1,0 +1,116 @@
+@import "../mixin";
+@import "../base/base";
+@import "../components/navbar";
+@import "../components/menuBurguer";
+@import "../components/footer";
+
+#profile {
+  width: 100%;
+  height: 100vh;
+}
+
+.container_profile {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+  @include media(sm) {
+    padding: 1rem;
+    flex-direction: row;
+  }
+}
+
+.container_profile-card {
+  width: 100%;
+  height: 339px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.container_profile-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-box_one {
+  width: 100%;
+  @include media(sm) {
+    width: 900px;
+  }
+}
+.profile-box_two {
+  width: 100%;
+  min-width: 220px;
+  @include media(sm) {
+    width: 300px;
+  }
+}
+
+.container_profile-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  height: 155px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: $base_font-geo;
+  color: $base;
+  h2 {
+    font-weight: bold;
+    font-size: $base_size-title;
+  }
+
+  p {
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 4px;
+  }
+}
+
+.box_green-high {
+  background-color: $base_green_high-card;
+}
+
+.box_green-low {
+  background-color: $base_green_low-card;
+}
+
+#card {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  flex-direction: row;
+  padding: 51px;
+}
+
+.card_container {
+  text-align: center;
+  h3 {
+    color: #000;
+    font-family: $base_font-fredooka;
+    font-size: $base_size-md;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 4.55px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  p{
+    padding: 5px;
+  }
+}

@@ -1,13 +1,15 @@
 #navbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   background-color: $base_white;
   width: 100%;
   display: flex;
-  justify-content: center;
-  height: 180px;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
+  padding: 2rem;
   @include media(sm) {
-    height: 150px;
     flex-direction: row;
   }
 }
@@ -38,7 +40,7 @@
 
 #navbar_title {
   color: $base_text-blue;
-  font-family: bold;
+  font-family: $base_font-fredooka;
   font-size: $base_size-md;
   font-weight: bold;
 }

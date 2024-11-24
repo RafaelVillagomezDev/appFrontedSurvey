@@ -12,7 +12,7 @@ export const itemLinks = [
     url: "/app",
     component: <CgProfile />,
     subItems: [
-      { name: "Subitem 1.1", url: "/subitem-1-1", component: "" },
+      { name: "Mi perfil", url: "/profile", component: "" },
       { name: "Subitem 1.2", url: "/subitem-1-2", component: "" },
       { name: "Subitem 1.3", url: "/subitem-1-3", component: "" },
     ],
@@ -22,8 +22,9 @@ export const itemLinks = [
     url: "/app",
     component: <FcSurvey />,
     subItems: [
+    
+      { name: "Encuestas", url: "/app", component: "" },
       { name: "Crear encuesta", url: "/survey/create", component: "" },
-      { name: "Subitem 1.2", url: "/subitem-1-2", component: "" },
       { name: "Subitem 1.3", url: "/subitem-1-3", component: "" },
     ],
   },

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkappfronted=self.webpackChunkappfronted||[]).push([[123],{7123:(e,n,t)=>{t.r(n),t.d(n,{default:()=>r});var a=t(6540);const r=function(){return a.createElement("div",{className:"spinner"})}}}]);
-//# sourceMappingURL=123.1183481a65858bec984c.chunk.js.map

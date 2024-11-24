@@ -3,7 +3,7 @@
   background-color: $base;
   position: fixed;
   right: 0;
-  z-index: 1;
+  z-index: 3;
   width: 60%;
   top: 0;
   @include media(sm) {

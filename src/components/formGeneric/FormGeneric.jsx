@@ -31,6 +31,7 @@ function FormGeneric({
     maxLength,
     loading = "",
     loadingComponent = "",
+    autoComplete=""
   }) => {
     const fieldError = errors[id] ? "input-error" : ""; // Usamos id para verificar errores
 
@@ -44,6 +45,7 @@ function FormGeneric({
             onChange={handleChange}
             className={`${className} ${fieldError}`.trim()}
             {...events} // Pasamos los eventos personalizados
+            autoComplete={autoComplete}
           >
             <option value="">Selecciona una opción</option>
             {options.map((option) => (
@@ -64,6 +66,7 @@ function FormGeneric({
             className={`${className} ${fieldError}`.trim()}
             maxLength={maxLength} // Establecemos el maxLength
             {...events} // Pasamos los eventos personalizados
+        
           />
         );
       case "checkbox":
@@ -76,6 +79,7 @@ function FormGeneric({
             onChange={handleChange}
             className={className}
             {...events} // Pasamos los eventos personalizados
+            autoComplete={autoComplete}
           />
         );
       case "text":
@@ -90,6 +94,7 @@ function FormGeneric({
             className={`${className} ${fieldError}`.trim()}
             maxLength={maxLength} // Establecemos el maxLength
             {...events} // Pasamos los eventos personalizados
+            autoComplete={autoComplete}
           />
         );
       default:
@@ -104,6 +109,7 @@ function FormGeneric({
             className={`${className} ${fieldError}`.trim()}
             maxLength={maxLength} // Establecemos el maxLength
             {...events} // Pasamos los eventos personalizados
+            autoComplete={autoComplete}
           />
         );
     }

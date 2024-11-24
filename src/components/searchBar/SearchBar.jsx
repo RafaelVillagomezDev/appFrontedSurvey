@@ -20,18 +20,7 @@ function SearchBar() {
 
   return (
     <div id="navlogin_container">
-      <select
-        id="selectSearch"
-        name="selectSearch"
-        defaultValue={optionSelected}
-        onChange={handleOption}
-      >
-        <option value="" disabled>
-          Elige una opción
-        </option>
-        <option value="Productos_Categoria">Categoría</option>
-        <option value="Encuesta_ID">Id Encuesta</option>
-      </select>
+     
       <input
         type="search"
         value={searchWord}
@@ -39,6 +28,18 @@ function SearchBar() {
         placeholder="Buscar"
         id="Buscador"
       />
+       <select
+        id="selectSearch"
+        name="selectSearch"
+        defaultValue={optionSelected}
+        onChange={handleOption}
+      >
+        <option value="" disabled>
+          Opciones
+        </option>
+        <option value="Productos_Categoria">Categoría</option>
+        <option value="Encuesta_ID">Encuesta</option>
+      </select>
     </div>
   );
 }

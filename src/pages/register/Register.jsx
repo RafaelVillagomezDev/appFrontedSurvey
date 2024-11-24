@@ -27,6 +27,7 @@ const fields = [
     placeholder: "Ingresa una nombre",
     className: "form_input",
     maxLength: 20,
+    autocomplete:"name"
   },
 
   {
