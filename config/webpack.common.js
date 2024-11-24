@@ -43,7 +43,7 @@ module.exports = {
       filename: "[path][base].gz", // Nombre del archivo comprimido
       algorithm: "gzip", // Algoritmo de compresión (también puede usar 'brotliCompress')
       threshold: 10240, // Sólo comprimir archivos mayores a 10KB
-      minRatio: 0.8, // Sólo comprimir archivos que puedan reducir su tamaño en un 20%
+      minRatio: 0.6, // Sólo comprimir archivos que puedan reducir su tamaño en un 20%
     }),
 
     new CleanWebpackPlugin(),
