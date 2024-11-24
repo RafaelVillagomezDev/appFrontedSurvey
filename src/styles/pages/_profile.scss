@@ -6,7 +6,7 @@
 
 #profile {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .container_profile {
@@ -16,21 +16,29 @@
   height: 100%;
   flex-direction: column;
   justify-content: center;
-  padding: 3rem;
+  padding: 1rem;
+  align-items: center;
   @include media(sm) {
-    padding: 1rem;
+    padding: 2rem;
+    flex-direction: column;
+  }
+  @include media(lg) {
     flex-direction: row;
   }
 }
 
 .container_profile-card {
   width: 100%;
-  height: 339px;
+  height: 100%;
   flex-shrink: 0;
   border-radius: 50px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  @include media(sm) {
+    max-height: 380px;
+    height: 100%;
+  }
 }
 
 .container_profile-column {
@@ -42,7 +50,8 @@
 .profile-box_one {
   width: 100%;
   @include media(sm) {
-    width: 900px;
+    width: 100%;
+    max-width: 900px;
   }
 }
 .profile-box_two {
@@ -91,16 +100,20 @@
   display: flex;
   justify-content: space-around;
   gap: 1rem;
-  flex-direction: row;
-  padding: 51px;
+  flex-direction: column;
+  padding: 2rem;
+
+  @include media(sm) {
+    flex-direction: row;
+  }
 }
 
 .card_container {
-  text-align: center;
+  margin: auto;
   h3 {
     color: #000;
     font-family: $base_font-fredooka;
-    font-size: $base_size-md;
+    font-size: $base_size-title;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -108,9 +121,59 @@
     display: flex;
     align-items: center;
     gap: 8px;
+
+    @include media(sm){
+      font-size: $base_size-md;
+    }
+
   }
 
-  p{
+  h4 {
+    color: #000;
+    font-family: $base_font-fredooka;
+    font-size: $base_size-subtitle;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.1px;
+    line-height: 3rem;
+    display: flex;
+    align-items: center;
+    @include media(sm){
+      font-size: $base_size-title;
+    }
+
+  }
+
+  p {
     padding: 5px;
   }
+}
+
+.card_container-box {
+  margin-bottom: 1rem;
+  h5 {
+    color: rgba(0, 0, 0, 0.54);
+    font-family: $base_font-fredooka;
+    font-size: $base_size-subtitle;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3rem;
+    letter-spacing: 1.4px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+#profile_img {
+  height: 120px;
+  @include media(sm) {
+    height: 150px;
+  }
+  @include media(md) {
+    height: 200px;
+  } 
+ 
+  
 }

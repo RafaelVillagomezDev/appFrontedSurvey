@@ -1,5 +1,10 @@
 import React, { lazy } from "react";
 import { FiEdit } from "react-icons/fi";
+import { SiMinutemailer } from "react-icons/si";
+import { FaRegAddressCard } from "react-icons/fa";
+import { BsCake2 } from "react-icons/bs";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import profile from "../../../public/assets/img/profile.png";
 
 const NavBarDefault = lazy(() =>
   import("../../components/navBar/NavBarDefault")
@@ -20,14 +25,37 @@ function Profile() {
         <div className="container_profile">
           <div className="container_profile-column profile-box_one">
             <div id="card" className="container_profile-card">
-                <div className="card_container">
-                   <h3>Yandry Rafael <FiEdit /> </h3>
-                   <h4>Villagomez Montero</h4>
-                   <p></p>
+              <div className="card_container">
+                <div className="card_container-box">
+                  <h3>
+                    Yandry Rafael <FiEdit />
+                  </h3>
+                  <h4>Villagomez Montero</h4>
                 </div>
-                <div className="card_container">
-                  <h3>Foto</h3>
+                <div className="card_container-box">
+                  <h5>
+                    yandry75@gmail.com <SiMinutemailer />
+                  </h5>
+                  <h5>
+                    15/06/1998 <BsCake2 />
+                  </h5>
+                  <h5>
+                    51802765A <FaRegAddressCard />
+                  </h5>
+                 
                 </div>
+              </div>
+              <div className="card_container">
+                <figure>
+                  <LazyLoadImage
+                    id="profile_img"
+                    src={profile}
+                    alt="Profile"
+                    
+                    
+                  />
+                </figure>
+              </div>
             </div>
           </div>
           <div className="container_profile-column profile-box_two">
