@@ -2,8 +2,12 @@ import React, { lazy } from "react";
 const NavBarDefault = lazy(() =>
   import("../../components/navBar/NavBarDefault")
 );
-const CardProdile = lazy(() =>
-  import("../../components/cardProfile/cardProfile")
+const CardProfile = lazy(() =>
+  import("../../components/cardProfile/CardProfile")
+);
+
+const ChartProfile = lazy(() =>
+  import("../../componentsChart/chartProfile/ChartProfile")
 );
 const Footer = lazy(() => import("../../components/footer/Footer"));
 
@@ -18,7 +22,8 @@ function Profile() {
   return (
     <>
       <NavBarDefault />
-      <CardProdile />
+      <CardProfile />
+      <ChartProfile/>
       <Footer />
     </>
   );

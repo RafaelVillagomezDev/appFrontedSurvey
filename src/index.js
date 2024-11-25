@@ -28,6 +28,7 @@ const Profile = lazy(() => import("./pages/profile/Profile"));
 
 
 
+
 // Definir las rutas utilizando createRoutesFromElements
 const routes = createRoutesFromElements(
   <>
@@ -59,3 +60,6 @@ root.render(
     </Provider>
   </Suspense>
 );
+
+
+

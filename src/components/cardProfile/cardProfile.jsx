@@ -6,7 +6,7 @@ import { BsCake2 } from "react-icons/bs";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import profile from "../../../public/assets/img/profile.webp";
 
-function cardProfile() {
+function CardProfile() {
   return (
     <div id="profile">
       <div className="container_profile">
@@ -35,6 +35,7 @@ function cardProfile() {
               <figure>
              
                 <img  id="profile_img" src={profile} alt="Profile" />
+                
               </figure>
             </div>
           </div>
@@ -54,4 +55,4 @@ function cardProfile() {
   );
 }
 
-export default  cardProfile;
+export default  CardProfile;
