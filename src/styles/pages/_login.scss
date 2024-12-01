@@ -3,31 +3,30 @@
 @import "../components/spinner";
 @import "../components/footer";
 
-
-#main_component-yellow{
-   position: absolute;
-   left: 0;
-   top: 20px;
-   display: none;
-   @include media(md) {
-      display: block;
-   }
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-#main_component-green{
+#main_component-yellow {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  display: none;
+  @include media(md) {
+    display: block;
+  }
+}
+
+#main_component-green {
   position: absolute;
   left: 0;
   bottom: 100px;
   display: none;
   @include media(md) {
     display: block;
- }
-}
-
-#wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  }
 }
 
 #main {
@@ -36,14 +35,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
- 
+  padding: 3rem;
 }
 
 #main_container {
-  display: flex;
-  gap: 2rem;
-  justify-content: space-around;
-  padding: 2rem;
+  display: block;
+  @include media(md) {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-around;
+  }
 }
 
 #main_container-portada {
@@ -73,7 +74,6 @@
   }
 
   @include media(sm) {
-    margin: 0px;
     display: flex;
     justify-content: center;
   }
@@ -105,8 +105,6 @@
     width: 100%;
   }
 }
-
-
 
 .form_login-group {
   display: flex;
@@ -159,6 +157,7 @@
 }
 
 .main_box-register {
+  font-size: $base_font-geo;
   a {
     cursor: pointer;
     color: $base_text-violet;
@@ -170,15 +169,174 @@
   }
 }
 
-.error_container{
+.error_container {
   position: relative;
-  min-height: 1.5rem; 
+  min-height: 1.5rem;
 }
 
-.error{
+.error {
   word-wrap: break-word; /* Permite que las palabras largas se dividan */
   word-break: break-word; /* Otra opción para dividir palabras largas */
   color: red;
   position: absolute;
   font-size: $base_size;
+}
+
+#login {
+  width: 100%;
+  height: 100%;
+  background-color: $base;
+  padding: 2rem;
+  @include media(sm) {
+    padding: 3rem;
+  }
+
+}
+
+.login_carrousel {
+  display: flex;
+  flex-direction: row;
+  gap: 0rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  @include media(sm) {
+    gap: 2rem;
+    
+    justify-content: space-evenly;
+  }
+}
+
+.login_carrousel-box {
+  h3 {
+    color: $base_text-purple;
+    text-align: center;
+    font-family: $base_font-geo;
+    font-size: $base_size-sm;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    @include media(sm) {
+      font-size: $base_size-lg;
+    }
+  }
+
+  p {
+    line-height: 2rem;
+    color: rgba(0, 0, 0, 0.54);
+    font-family: $base_font-geo;
+    font-size: $base_size;
+    font-style: normal;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.2rem;
+    @include media(sm) {
+      justify-content: center;
+      font-size: $base_size-md;
+    }
+  }
+}
+
+//Login
+
+.login_about {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login_about-image{
+  display: none;
+  @include media(sm) {
+    display: block;
+  }
+}
+
+.login_about-box {
+  h3 {
+    color: $base_text-blue;
+    text-align: center;
+    font-family: $base_font-geo;
+    font-size: $base_size-md;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    @include media(sm) {
+      font-size: $base_size-lg;
+    }
+  }
+
+  p {
+    font-size: $base_size-md;
+    line-height: 2rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: left;
+    display: block;
+  }
+}
+
+.login_about-container {
+  padding-top: 1rem;
+  width: 100%;
+  max-width: 520px;
+
+  h2 {
+    font-size: $base_size-subtitle;
+    font-family: $base_font-geo;
+    font-style: normal;
+    color: $base_text-violet;
+  }
+  p {
+    font-size: $base_size;
+    font-family: $base_font-geo;
+    line-height: 1.5rem;
+    word-wrap: break-word; /* Permite que las palabras largas se dividan y no desborden */
+    overflow-wrap: break-word; /* Equivalente moderno */
+    text-align: justify;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.68px;
+  }
+
+  ul {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  li {
+    font-size: $base_size;
+    font-family: $base_font-geo;
+    line-height: 1.5rem;
+    word-wrap: break-word; /* Permite que las palabras largas se dividan y no desborden */
+    overflow-wrap: break-word;
+    text-align: justify;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.68px;
+    @include media(sm){
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.underline {
+  display: inline;
+  background: linear-gradient(to right, purple, transparent);
+  background-position: 0 100%;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
 }

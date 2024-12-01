@@ -6,6 +6,10 @@ import PortadaLogin from "../../../public/assets/img/Portada_login.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import MySwal from "sweetalert2";
 import { isRejectedWithValue } from "@reduxjs/toolkit";
+import { IoCloudDownloadOutline } from "react-icons/io5";
+import { SlUser } from "react-icons/sl";
+import { FcSurvey } from "react-icons/fc";
+import PortadaAbout from "../../../public/assets/img/Portada_about.webp";
 
 const Footer = lazy(() => import("../../components/footer/Footer"));
 const FormGeneric = lazy(() =>
@@ -167,6 +171,61 @@ function Login() {
               fill="#C8F9B4"
             />
           </svg>
+        </div>
+      </div>
+      <div id="login">
+        <div className="login_carrousel">
+          <div className="login_carrousel-box">
+            <h3>+200M</h3>
+            <p>
+              <IoCloudDownloadOutline />
+              Descargas
+            </p>
+          </div>
+          <div className="login_carrousel-box">
+            <h3>+480M</h3>
+            <p>
+              {" "}
+              <FcSurvey /> Encuestas
+            </p>
+          </div>
+          <div className="login_carrousel-box">
+            <h3>+120M</h3>
+            <p>
+              <SlUser />
+              Usuarios
+            </p>
+          </div>
+        </div>
+        <div className="login_about">
+          <div className="login_about-box login_about-image">
+            <LazyLoadImage src={PortadaAbout} height={400} alt="about image" />
+          </div>
+          <div className="login_about-box">
+            <h3>¿Quienes somos ?</h3>
+            <div class="login_about-container">
+              <p>
+                Somos una empresa especializada en encuestas, <span className="underline">conectando </span>
+                empresas y usuarios para obtener opiniones y retroalimentación
+                valiosa.
+              </p>
+              <ul>
+                <li>
+                  Las empresas crean <span className="underline">  encuestas personalizadas </span> para recopilar datos clave.
+                </li>
+                <li>
+                  Los usuarios <span className="underline"> participan en encuestas </span> y contribuyen a mejorar productos y servicios.
+                </li>
+              </ul>
+              <p>
+                Nuestra misión es ofrecer <strong className="underline">insights</strong> que ayuden a
+                las empresas a crecer, mientras brindamos a los usuarios una
+                <span className="underline"> experiencia interactiva y significativa.</span>Creemos en el poder de
+                la opinión de cada usuario y trabajamos para mejorar la forma en
+                que las empresas escuchan a sus clientes.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <Footer />

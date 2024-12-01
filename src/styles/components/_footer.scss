@@ -116,10 +116,13 @@ footer {
 
   h3 {
     text-decoration: none;
-    font-size: $base_size-title;
+    font-size: $base_size-subtitle;
     font-family: $base_font-fredooka;
     color: $base;
     font-weight: bold;
+    @include media(sm){
+      font-size: $base_size-title;
+    }
   }
 
   h3:hover {
